@@ -2356,6 +2356,7 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\EmployerUse\Data\" />
     <Folder Include="Areas\EmployerUse\Views\View\" />
+    <Folder Include="Models\Database\" />
     <Folder Include="Views\CV\" />
     <Folder Include="Views\Search\" />
     <Folder Include="Views\UI\" />
