@@ -5,10 +5,23 @@
     DataWorkEntities db = new DataWorkEntities();
     User user = (User)Session["user"];
 }
+@{ 
+    //De xuat
+    //-De xuat chua dang nhap-
+    List<Work> wpnl = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_delete == false).OrderByDescending(n => n.work_datecreated).Take(8).ToList();
+    //-De xuat da dang nhap-
+
+    //Viec làm hot nhất
+    List<Work> whot = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_delete == false && n.Employer.employer_version == 3).OrderByDescending(n => n.work_datecreated).Take(8).ToList();
+
+    //Viec làm nổi bậc
+    List<Work> woutstanding = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_delete == false && n.Employer.employer_version == 2).OrderByDescending(n => n.work_datecreated).Take(8).ToList();
+
+}
 @Html.Action("Css", "Home")
 <div class="w3l-hero-headers-9">
     <section class="slide slide-one">
-        <div class="container">
+        <div class="container" style="max-width: 1150px">
             <!-- <div class="row"> -->
             <div class="row">
                 <div class="banner-text col-lg-5">
@@ -19,11 +32,18 @@
                         <li><i class="fa fa-check">&nbsp;</i>Có tất cả các công việc theo nghành nghề</li>
                         <li><i class="fa fa-check">&nbsp;</i>Trình tìm kiếm thông minh, ưu tiên hiển thị công việc theo nghành nghề</li>
                     </ul>
-                    <a href="services.html" class="btn logo-button top-margin">Tạo CV</a>
+                    @if (user != null)
+                    {
+                        <a href="services.html" class="btn logo-button top-margin">Tạo CV</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login","User")" class="btn logo-button top-margin">Tạo CV</a>
+                    }
                     <a href="services.html" class="btn logo-button top-margin">Tìm việc</a>
                     <h6 class="para">Đảm bảo <strong>có việc nhanh </strong>sau khi nộp đơn.</h6>
                 </div>
-                <div class="image-postion col-lg-7">
+                <div class="image-postion col-lg-7" style="padding: 0px 0px 0px 0px">
                     <img src="~/Content/Layout/images/bb2.jpg" alt="product" class="img-responsive banner-images">
                 </div>
 
@@ -38,21 +58,27 @@
         <div class="container" style="max-width: 1500px">
             <div class=" main-cont-wthree-2">
                 <div class="left-contect-calls text-center">
-                    <h3>Các công ty hàng đầu</h3>
+                    <h2>Các công ty hàng đầu</h2>
                     <div class="row mt-4">
                         @{
                             List<Employer> employers = db.Employers.Where(n => n.employer_activate == true && n.employer_option == true && n.employer_version == 3).OrderByDescending(n => n.employer_datecreated).Take(6).ToList();
                         }
-                        @foreach (var item in employers)
-                        {
-                            <div class="col-lg-2">
-                                <div class="grids-effect-2 card shadow hover">
-                                    <a href="" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                        <img src="~/Images/Employer/@item.employer_logo" alt="" style="height: 150px; width: 100%">
-                                    </a>
-                                </div>
+                        <div class="logo-slider">
+                            <div class="logo-slide-track">
+                                @foreach (var item in employers)
+                                {
+                                    <div class="slide">
+                                        <img src="~/Images/Employer/@item.employer_logo" alt="" style="height: 100px; width: 150px" />
+                                    </div>
+                                }
+                                @foreach (var item in employers)
+                                {
+                                    <div class="slide">
+                                        <img src="~/Images/Employer/@item.employer_logo" alt="" style="height: 100px; width: 150px" />
+                                    </div>
+                                }
                             </div>
-                        }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,84 +88,63 @@
 <section class="w3l-call-to-action_9">
     <div class="">
         <div class="container" style="max-width: 1500px">
-            <div class=" main-cont-wthree-2">
-                <div class="left-contect-calls">
-                    <div class="ui top attached tabular menu">
-                        <a class="item active" data-tab="first">Việc làm tốt nhất</a>
-                        <a class="item" data-tab="second">Việc làm nổi bậc</a>
-                        <a class="item" data-tab="third">Việc làm mới nhất</a>
-                    </div>
-                    <div class="ui bottom attached tab segment active" data-tab="first">
-                        <div class="row">
-                            @foreach(var item in Model.Where(n=>n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.Employer.employer_version == 3).OrderByDescending(n=>n.work_datecreated).Take(12))
-                            {
-                                <div class="col-lg-4 hovercard" style="margin-top: 1px; padding: 6px;">
-                                    <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
-                                        <div class="ui divided items w-100">
-                                            <div class="item">
-                                                <div class="image">
-                                                    <div class="ui two column grid">
-                                                        <div class="column w-100">
-                                                            <div class="ui fluid image">
-                                                                <a class="ui left corner label text-danger">
-                                                                    <i class="heart icon"></i>
-                                                                </a>
-                                                                <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="content" style="font-size: 10px">
-                                                    <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0,40) + "...")</a>
-                                                    <div class="meta">
-                                                        <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
-                                                    </div>
-                                                    <div class="description">
-                                                        <p>
-                                                            <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
-                                                        </p>
-                                                    </div>
-                                                    <div class="extra">
-                                                        <div class="ui right floated">
-                                                            <a class="ui red tag label">HOT</a>
-                                                        </div>
-                                                        <div class="ui">
-                                                            @if(user != null)
-                                                            {
+            <div class="col-lg-12">
+                <h2 style="text-align: left">VIỆC LÀM ĐỀ XUẤT</h2>
+            </div>
+            <div class="row">
+                @if (user != null)
+                {
 
-                                                            }
-                                                            else
-                                                            {
-                                                                <a class="text-primary"><i class="fa fa-dollar">&nbsp;</i>Đăng nhập xem lương</a>
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                }
+                else
+                {
+                    foreach (var item in wpnl)
+                    {
+                        <div class="col-lg-3">
+                            <figure class="snip1253 hover" style=" max-width: 96%;">
+                                <div class="image">
+                                    <img src="~/Images/Employer/cover_trang_chu.jpg" alt="sample66" class="w-100" style="height: 170px"/>
+                                    <center>
+                                        <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 150px; height: 100px; z-index: 10000; margin-top: -45%" />
+                                    </center>
                                 </div>
-                            }
+                                <figcaption>
+                                    <div class="date"><span class="day">@item.work_datesend.Value.Day</span><span class="month">@item.work_datesend.Value.Month</span></div>
+                                    <h3>@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</h3>
+                                    <p>
+                                        <ul>
+                                            <li>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,30) + "...")</li>
+                                            <li class="mt-2"><b><i class="fa fa-map-marker">&nbsp;</i></b>@item.Province.province_name</li>
+                                            <li class="mt-2">
+                                                @if (user != null)
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <span><b><i class="fas fa-dollar-sign">&nbsp;</i></b><span style="color: red">Đăng nhập xem lương</span></span>
+                                                }
+                                            </li>
+                                        </ul>
+                                    </p>
+                                </figcaption>
+                                <footer>
+                                    Nghành nghề: @item.Career.career_name
+                                </footer><a href="@Url.Action("DetailWork","View", new { id = item.work_id })"></a>
+                            </figure>
                         </div>
-                    </div>
-                    <div class="ui bottom attached tab segment" data-tab="second">
-                        Second
-                    </div>
-                    <div class="ui bottom attached tab segment" data-tab="third">
-                        Third
-                    </div>
-                    <script>
-                        $('.menu .item').tab();
-
-                        $('.tabular.menu .item').tab();
-
-                    </script>
-                </div>
+                    }
+                }
+            </div>
+            <div class="col-lg-12">
+                <center class="mt-4">
+                    <button class="ui red button" style="font-size: 20px">Xem nhiều việc làm đề xuất&nbsp;<i class="fas fa-angle-right"></i></button>
+                </center>
             </div>
         </div>
     </div>
 </section>
-<div class="container" style="max-width: 1500px">
+<div class="container mt-5" style="max-width: 1500px">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -167,356 +172,114 @@
         </a>
     </div>
 </div>
-<div class="container" style="max-width: 1500px">
+<div class="container mt-5" style="max-width: 1500px">
     <div class="row">
-        <div class="col-lg-8">
-            <div class="nav-wrapper">
-                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="plus icon">&nbsp;</i>VIỆC LÀM MỚI NHẤT</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                            <div class="row">
-                                @foreach (var item in Model.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true).OrderByDescending(n => n.work_datecreated).Take(12))
-                                {
-                                    <div class="col-lg-6 hovercard" style="margin-top: 1px; padding: 6px;">
-                                        <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
-                                            <div class="ui divided items w-100">
-                                                <div class="item">
-                                                    <div class="image">
-                                                        <div class="ui two column grid">
-                                                            <div class="column w-100">
-                                                                <div class="ui fluid image">
-                                                                    <a class="ui left corner label text-danger">
-                                                                        <i class="heart icon"></i>
-                                                                    </a>
-                                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="content" style="font-size: 10px">
-                                                        <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0, 40) + "...")</a>
-                                                        <div class="meta">
-                                                            <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
-                                                        </div>
-                                                        <div class="description">
-                                                            <p>
-                                                                <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
-                                                            </p>
-                                                        </div>
-                                                        <div class="extra">
-                                                            <div class="ui right floated">
-                                                                <a class="ui red tag label">HOT</a>
-                                                            </div>
-                                                            <div class="ui">
-                                                                @if (user != null)
-                                                                {
-
-                                                                }
-                                                                else
-                                                                {
-                                                                    <a class="text-primary"><i class="fa fa-dollar">&nbsp;</i>Đăng nhập xem lương</a>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-12">
+            <h3>VIỆC LÀM HOT NHẤT</h3>
         </div>
-        <div class="col-lg-4">
-            <div class="nav-wrapper">
-                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="hotjar icon">&nbsp;</i>VIỆC LÀM HOT NHẤT</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                            <div class="row">
-                                @foreach (var item in Model.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true).OrderByDescending(n => n.work_view).Take(12))
-                                {
-                                    <div class="col-lg-12 hovercard" style="margin-top: 1px; padding: 6px;">
-                                        <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
-                                            <div class="ui divided items w-100">
-                                                <div class="item">
-                                                    <div class="image">
-                                                        <div class="ui two column grid">
-                                                            <div class="column w-100">
-                                                                <div class="ui fluid image">
-                                                                    <a class="ui left corner label text-danger">
-                                                                        <i class="heart icon"></i>
-                                                                    </a>
-                                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="content" style="font-size: 10px">
-                                                        <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0, 40) + "...")</a>
-                                                        <div class="meta">
-                                                            <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
-                                                        </div>
-                                                        <div class="description">
-                                                            <p>
-                                                                <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
-                                                            </p>
-                                                        </div>
-                                                        <div class="extra">
-                                                            <div class="ui right floated">
-                                                                <a class="ui red tag label">HOT</a>
-                                                            </div>
-                                                            <div class="ui">
-                                                                @if (user != null)
-                                                                {
-
-                                                                }
-                                                                else
-                                                                {
-                                                                    <a class="text-primary"><i class="fa fa-dollar">&nbsp;</i>Đăng nhập xem lương</a>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
+        <div class="col-lg-12">
+            <div class="row">
+                @foreach (var item in whot)
+                {
+                    <div class="col-lg-3">
+                        <figure class="snip1253 hover" style=" max-width: 96%;">
+                            <div class="image">
+                                <img src="~/Images/Employer/cover_trang_chu.jpg" alt="sample66" class="w-100" style="height: 170px" />
+                                <center>
+                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 150px; height: 100px; z-index: 10000; margin-top: -45%" />
+                                </center>
                             </div>
-                        </div>
+                            <figcaption>
+                                <div class="date"><span class="day">@item.work_datesend.Value.Day</span><span class="month">@item.work_datesend.Value.Month</span></div>
+                                <h3>@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</h3>
+                                <p>
+                                    <ul>
+                                        <li>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,30) + "...")</li>
+                                        <li class="mt-2"><b><i class="fa fa-map-marker">&nbsp;</i></b>@item.Province.province_name</li>
+                                        <li class="mt-2">
+                                            @if (user != null)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <span><b><i class="fas fa-dollar-sign">&nbsp;</i></b><span style="color: red">Đăng nhập xem lương</span></span>
+                                            }
+                                        </li>
+                                    </ul>
+                                </p>
+                            </figcaption>
+                            <footer>
+                                Nghành nghề: @item.Career.career_name
+                            </footer><a href="@Url.Action("DetailWork","View", new { id = item.work_id })"></a>
+                        </figure>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>
 </div>
-<div class="container" style="max-width: 1500px">
+<div class="container mt-5" style="max-width:1500px">
     <div class="row">
         <div class="col-lg-4">
-            <div class="nav-wrapper">
-                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="hotjar icon">&nbsp;</i>VIỆC LÀM THỰC TẬP SINH</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                            <div class="row">
-                                @foreach (var item in Model.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true).OrderByDescending(n => n.work_view).Take(12))
-                                {
-                                    <div class="col-lg-12 hovercard" style="margin-top: 1px; padding: 6px;">
-                                        <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
-                                            <div class="ui divided items w-100">
-                                                <div class="item">
-                                                    <div class="image">
-                                                        <div class="ui two column grid">
-                                                            <div class="column w-100">
-                                                                <div class="ui fluid image">
-                                                                    <a class="ui left corner label text-danger">
-                                                                        <i class="heart icon"></i>
-                                                                    </a>
-                                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="content" style="font-size: 10px">
-                                                        <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0, 40) + "...")</a>
-                                                        <div class="meta">
-                                                            <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
-                                                        </div>
-                                                        <div class="description">
-                                                            <p>
-                                                                <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
-                                                            </p>
-                                                        </div>
-                                                        <div class="extra">
-                                                            <div class="ui right floated">
-                                                                <a class="ui red tag label">HOT</a>
-                                                            </div>
-                                                            <div class="ui">
-                                                                @if (user != null)
-                                                                {
-
-                                                                }
-                                                                else
-                                                                {
-                                                                    <a class="text-primary"><i class="fa fa-dollar">&nbsp;</i>Đăng nhập xem lương</a>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <img src="~/Images/AdEmployer/500x600 (updated)_112892.png" style="width: 100%; height: 250px" />
         </div>
         <div class="col-lg-4">
-            <div class="nav-wrapper">
-                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="hotjar icon">&nbsp;</i>VIỆC LÀM BÁN THỜI GIAN</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                            <div class="row">
-                                @foreach (var item in Model.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true).OrderByDescending(n => n.work_view).Take(12))
-                                {
-                                    <div class="col-lg-12 hovercard" style="margin-top: 1px; padding: 6px;">
-                                        <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
-                                            <div class="ui divided items w-100">
-                                                <div class="item">
-                                                    <div class="image">
-                                                        <div class="ui two column grid">
-                                                            <div class="column w-100">
-                                                                <div class="ui fluid image">
-                                                                    <a class="ui left corner label text-danger">
-                                                                        <i class="heart icon"></i>
-                                                                    </a>
-                                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="content" style="font-size: 10px">
-                                                        <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0, 40) + "...")</a>
-                                                        <div class="meta">
-                                                            <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
-                                                        </div>
-                                                        <div class="description">
-                                                            <p>
-                                                                <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
-                                                            </p>
-                                                        </div>
-                                                        <div class="extra">
-                                                            <div class="ui right floated">
-                                                                <a class="ui red tag label">HOT</a>
-                                                            </div>
-                                                            <div class="ui">
-                                                                @if (user != null)
-                                                                {
-
-                                                                }
-                                                                else
-                                                                {
-                                                                    <a class="text-primary"><i class="fa fa-dollar">&nbsp;</i>Đăng nhập xem lương</a>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <img src="~/Images/AdEmployer/500x600_112982.png" style="width: 100%; height: 250px" />
         </div>
         <div class="col-lg-4">
-            <div class="nav-wrapper">
-                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="hotjar icon">&nbsp;</i>VIỆC LÀM LƯƠNG CAO</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                            <div class="row">
-                                @foreach (var item in Model.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true).OrderByDescending(n => n.work_view).Take(12))
-                                {
-                                    <div class="col-lg-12 hovercard" style="margin-top: 1px; padding: 6px;">
-                                        <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
-                                            <div class="ui divided items w-100">
-                                                <div class="item">
-                                                    <div class="image">
-                                                        <div class="ui two column grid">
-                                                            <div class="column w-100">
-                                                                <div class="ui fluid image">
-                                                                    <a class="ui left corner label text-danger">
-                                                                        <i class="heart icon"></i>
-                                                                    </a>
-                                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="content" style="font-size: 10px">
-                                                        <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0, 40) + "...")</a>
-                                                        <div class="meta">
-                                                            <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
-                                                        </div>
-                                                        <div class="description">
-                                                            <p>
-                                                                <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
-                                                            </p>
-                                                        </div>
-                                                        <div class="extra">
-                                                            <div class="ui right floated">
-                                                                <a class="ui red tag label">HOT</a>
-                                                            </div>
-                                                            <div class="ui">
-                                                                @if (user != null)
-                                                                {
-
-                                                                }
-                                                                else
-                                                                {
-                                                                    <a class="text-primary"><i class="fa fa-dollar">&nbsp;</i>Đăng nhập xem lương</a>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
+            <img src="~/Images/AdEmployer/500x600_112956.jpg" style="width: 100%; height: 250px" />
+        </div>
+    </div>
+</div>
+<div class="container mt-5" style="max-width: 1500px">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>VIỆC LÀM NỔI BẬC</h3>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                @foreach (var item in whot)
+                {
+                    <div class="col-lg-3">
+                        <figure class="snip1253 hover" style=" max-width: 96%;">
+                            <div class="image">
+                                <img src="~/Images/Employer/cover_trang_chu.jpg" alt="sample66" class="w-100" style="height: 170px" />
+                                <center>
+                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 150px; height: 100px; z-index: 10000; margin-top: -45%" />
+                                </center>
                             </div>
-                        </div>
+                            <figcaption>
+                                <div class="date"><span class="day">@item.work_datesend.Value.Day</span><span class="month">@item.work_datesend.Value.Month</span></div>
+                                <h3>@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</h3>
+                                <p>
+                                    <ul>
+                                        <li>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,30) + "...")</li>
+                                        <li class="mt-2"><b><i class="fa fa-map-marker">&nbsp;</i></b>@item.Province.province_name</li>
+                                        <li class="mt-2">
+                                            @if (user != null)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <span><b><i class="fas fa-dollar-sign">&nbsp;</i></b><span style="color: red">Đăng nhập xem lương</span></span>
+                                            }
+                                        </li>
+                                    </ul>
+                                </p>
+                            </figcaption>
+                            <footer>
+                                Nghành nghề: @item.Career.career_name
+                            </footer><a href="@Url.Action("DetailWork","View", new { id = item.work_id })"></a>
+                        </figure>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>
 </div>
 <section class="w3l-teams-15">
-
     <div class="team-single-main">
         <div class="container">
             <div class=" grid grid-column-2 row">
@@ -607,85 +370,50 @@
         </div>
     </div>
 </section>
+<script>
+    /* Demo purposes only */
+    $(".hover").mouseleave(
+        function () {
+            $(this).removeClass("hover");
+        }
+    );
+</script>
+<script>
+    // -------------------------------------------------------------
+    //   Centered Navigation
+    // -------------------------------------------------------------
+    (function () {
+        var $frame = $('#forcecentered');
+        var $wrap = $frame.parent();
 
-<!-- grids block 4 -->
-<section class="w3l-grids-7">
-    <div class="grids4-block">
-        <div class="container">
-            <div class="row">
-                <div class="column-text col-lg-6">
-                    <h3 class="team-head">Thống kê</h3>
-                    <p class="para text">
-                        Với hơn 2 năm kinh nghiệm chúng tôi đã làm được những gì?
-                    </p>
-                    <div class="call-grids-w3">
-                        <div class="grids-1 grids-effect-2">
-                            <h4><a href="about.html" class="title-head">CV ứng viên</a></h4>
-                            <p class="para">+12000 Cv được tạo lập từ ứng viên</p>
-                        </div>
-                        <div class="grids-1 grids-effect-2">
-                            <h4><a href="about.html" class="title-head">Nhà tuyển dụng</a></h4>
-                            <p class="para">+1000 nhà tuyển dụng đối tác</p>
-                        </div>
-                        <div class="grids-1 grids-effect-2">
-                            <h4><a href="about.html" class="title-head">Liên kết</a></h4>
-                            <p class="para">+11000 đơn tiếp nhận thành công. </p>
-                        </div>
-                        <div class="grids-1 grids-effect-2">
-                            <h4><a href="about.html" class="title-head">Ứng viên</a></h4>
-                            <p class="para">+10000 ứng viên tham gia </p>
-                        </div>
-                    </div>
-                    <a href="#page" class="btn action-button mt-lg-5 mt-4 ">Khám phá</a>
-                </div>
-                <div class="col-lg-6">
-                    <img src="~/Content/Layout/images/b2.png" alt="product" class="img-responsive ">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- grids block 4 -->
+        // Call Sly on frame
+        $frame.sly({
+            horizontal: 1,
+            itemNav: 'centered',
+            smart: 1,
+            activateOn: 'click',
+            mouseDragging: 1,
+            touchDragging: 1,
+            releaseSwing: 1,
+            startAt: 3,
+            scrollBar: $wrap.find('.scrollbar'),
+            scrollBy: 1,
+            speed: 300,
+            elasticBounds: 1,
+            easing: 'easeOutExpo',
+            dragHandle: 1,
+            dynamicHandle: 1,
+            clickBar: 1,
 
-<section class="w3l-clients">
-    <div class="main-w3">
-        <div class="container">
-            <!-- main-slider -->
-            <div class="main-titles-head">
+            // Buttons
+            prev: $wrap.find('.prev'),
+            next: $wrap.find('.nextbtn'),
+            // Cycling
+            cycleBy: 'items',
+            cycleInterval: 3000,
+            pauseOnHover: 1,
+        });
+    }());
 
-                <h3 class="header-name">
-                    Các nhà tuyển dụng nói gì?
-                </h3>
 
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6 col-md-6 hh14-text margin-bottom">
-                    <div class="hh14-info">
-                        <img src="~/Content/Layout/images/c1.jpg" alt="product" class="img-responsive ">
-                        <p class="para mt-3">
-                            Consectetur adipisicing Lorem ipsum dolor sit amet,elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim.
-                        </p>
-                        <h4>Jack Willson</h4>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6 hh14-text">
-                    <div class="hh14-info">
-                        <img src="~/Content/Layout/images/c2.jpg" alt="product" class="img-responsive ">
-                        <p class="para mt-3">
-                            Consectetur adipisicing Lorem ipsum dolor sit amet,elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim.
-                        </p>
-                        <h4>Nike samson</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+</script>

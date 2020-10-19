@@ -1,0 +1,256 @@
+﻿@model IEnumerable<AllWork1s.Models.Employer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_pass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_sex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_vacancies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_token)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_datelogin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_datecreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_activate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_specialized)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_option)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_personalpage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_introduce)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_favourite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_linkfc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_recruitment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_addressmain)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_ifamemapmain)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_addresstwo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_ifamemaptwo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_addressthree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_ifamemapthree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_province)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_pricemin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_pricemax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_symbol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_recrequirement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employer_limit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Career.career_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Province.province_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_pass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_sex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_vacancies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_token)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_datelogin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_datecreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_activate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_specialized)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_version)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_option)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_personalpage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_introduce)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_favourite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_linkfc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_recruitment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_addressmain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_ifamemapmain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_addresstwo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_ifamemaptwo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_addressthree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_ifamemapthree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_province)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_pricemin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_pricemax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_symbol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_recrequirement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer_limit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Career.career_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Province.province_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.employer_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.employer_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.employer_id })
+        </td>
+    </tr>
+}
+
+</table>

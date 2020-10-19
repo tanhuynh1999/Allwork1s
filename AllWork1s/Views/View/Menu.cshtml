@@ -1,0 +1,91 @@
+﻿@using AllWork1s.Models;
+@{
+    User user = (User)Session["user"];
+}
+@Html.Action("Css", "Home")
+<section class=" w3l-header-4 header-sticky sticky-top">
+    <header class="absolute-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <h1>
+                    <a class="navbar-brand" href="/">
+                        <span class="fa fa-line-chart" aria-hidden="true"></span>
+                        AllWork1s
+                    </a>
+                </h1>
+                <button class="navbar-toggler bg-gradient" type="button" data-toggle="collapse"
+                        data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white font-weight-bold" href="index.html">Mẫu CV <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white font-weight-bold" href="@Url.Action("AllWork","View")">Việc làm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white font-weight-bold" href="@Url.Action("AllEmployer","View")">Công ty</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white font-weight-bold" href="services.html">Cuộc sống công việc</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav search-righ">
+                        @if (user != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-link-icon dropdown-toggle" href="javascript:;" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="ui avatar image" src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg">
+                                    <span class="text-white">Ứng viên: @user.user_nicename</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right bg-white" aria-labelledby="navbar-default_dropdown_1" style="width: 300px;">
+                                    <a class="dropdown-item" href="javascript:;" style="font-size: 15px !important"><b class="text-dark">Mã ứng viên: @user.user_id</b></a>
+                                    <a class="dropdown-item" href="javascript:;" style="font-size: 15px !important">Tạo CV xin việc</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("PersonalInformation","User", new { id = user.user_id })"><i class="fa fa-user">&nbsp;</i>Thông tin tài khoản</a>
+                                    <a class="dropdown-item" href="@Url.Action("ViewCV","CVUser")"><i class="fa fa-address-card">&nbsp;</i>Quản lý hồ sơ</a>
+                                    <a class="dropdown-item" href="@Url.Action("WorkUser","Work")"><i class="fa fa-archive">&nbsp;</i>Việc làm đã nộp</a>
+                                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-heart">&nbsp;</i>Việc làm đã lưu</a>
+                                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-eye">&nbsp;</i>NTD xem hồ sơ</a>
+                                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-search">&nbsp;</i>Cài đặt tìm việc</a>
+                                    <a class="dropdown-item" href="javascript:;"><i class="fas fa-user-cog">&nbsp;</i>Cài đặt tài khoản</a>
+                                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-cog">&nbsp;</i>Tùy chọn</a>
+                                    <a class="dropdown-item" href="javascript:;"><i class="fas fa-level-up-alt">&nbsp;</i>Nâng cấp tài khoản</a>
+                                    <a class="dropdown-item" href="javascript:;"><i class="fas fa-pager">&nbsp;</i>Quản lý Bài viết</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("LogOut","User")"><i class="fa fa-sign-out-alt">&nbsp;</i>Đăng xuất</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" title="Search"><a href="@Url.Action("Login","User")" class="btn search-search"><i class="fa fa-user mr-2" aria-hidden="true"></i>Đăng nhập</a></li>
+                            <li class="nav-item" title="Search"><a target="_blank" href="@Url.Action("Index","EmployerUse/HomeEmployer")" class="btn btn-danger"><i class="fa fa-building mr-2" aria-hidden="true"></i>Nhà tuyển dụng</a></li>
+                        }
+
+                    </ul>
+                    <!-- search popup -->
+                    <div id="search" class="pop-overlay">
+                        <div class="popup">
+                            <form action="#" method="GET" class="d-flex">
+                                <input type="search" placeholder="Search.." name="search" required="required" autofocus>
+                                <button type="submit">Search</button>
+                                <a class="close" href="#">&times;</a>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /search popup -->
+                </div>
+                </nav>
+        </div>
+    </header>
+</section>
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+        ;
+</script>

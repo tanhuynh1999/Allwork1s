@@ -1,0 +1,235 @@
+﻿@using AllWork1s.Models;
+@model Employer
+@{
+    ViewBag.Title = "Manager";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+    DataWorkEntities db = new DataWorkEntities();
+}
+@{
+    //dem viec lam employer
+    List<Work> countworkid = db.Works.Where(n => n.employer_id == Model.employer_id).ToList();
+    //dem cv
+    List<Cv> countcv = db.Cvs.ToList();
+}
+<div class="alert alert-danger">
+    <b style="color: red">Hướng dẫn: </b>
+    <br />
+    <ul>
+        <li><b>Thêm bài tuyển:</b> Hệ thống sẽ tính tổng bài đăng của nhà tuyển dụng, nếu vượt quá giới hạn sẽ không được phép đăng bài tuyển nữa. Nhà tuyển dụng có thể nâng cấp phiên bản để tăng giới hạn của mình đăng bài, nếu tài khoản đã là phiên bản cao cấp, nhà tuyển dụng có thể nâng thêm bài tuyển <a href="#">Tại đây</a>.</li>
+        <li><b>Quản lý hồ sơ ứng viên:</b> Sau khi nhà tuyển dụng đăng tin tuyển dụng. Ứng viên sẽ thấy bài tuyển và kích chọn nộp hồ sơ để nộp cv. Tất cả hồ sơ sẽ lưu vào trình quản lý này, bao gồm tất cả chức năng từ liên hệ,check,...</li>
+        <li><b>Quảng cáo:</b> Tùy vào phiên bản nâng cấp, AllWork1s cho phép nhà tuyển dụng có thể đăng tải quảng cáo lên trang cá nhân của nhà tuyển dụng hoặc toàn website.</li>
+    </ul>
+</div>
+<div class="statistics">
+    <h4>Quảng cáo</h4>
+    <div class="row">
+        <div class="col-xl-6 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-danger">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                TRANG CÁ NHÂN<br />
+                                <p style="font-size: 15px;" class="text-white">
+                                    <span>(Trang cá nhân riêng)</span>
+                                    <br />
+                                    <span>(Trạng thái hiển thị)</span>
+                                </p>
+                            </center>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-6 pl-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top ">
+                        <button class="btn btn-danger">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                ĐĂNG BÀI<br />
+                                <p style="font-size: 15px;" class="text-white">
+                                    <span>(Đã đăng/Giới hạn bài tuyển)</span>
+                                    <br />
+                                    <span>(@countworkid.Count/@Model.employer_limit)</span>
+                                </p>
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 pl-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-danger">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                TÌM KIẾM HỒ SƠ<br />
+                                <p style="font-size: 15px;" class="text-white">
+                                    <span>(Số lượng hồ sơ ứng viên hiện có)</span>
+                                    <br />
+                                    <span>(@countcv.Count hồ sơ)</span>
+                                </p>
+                            </center>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top ">
+                        <button class="btn btn-danger">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                ĐĂNG TIN TỨC<br />
+                                <p style="font-size: 15px;" class="text-white">
+                                    <span>(Số lượng đăng)</span>
+                                    <br />
+                                    <span>(0 bài viết)</span>
+                                </p>
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="statistics">
+    <h4>Quản lý</h4>
+    <div class="row">
+        <div class="col-xl-6 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top ">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                QUẢN LÝ BÀI ĐĂNG<br />
+                                <p style="font-size: 15px;" class="text-white">
+                                    <span>(Đã đăng/Giới hạn bài tuyển)</span>
+                                    <br />
+                                    <span>(@countworkid.Count/@Model.employer_limit)</span>
+                                </p>
+                            </center>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-6 pl-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                QUẢN LÝ HỒ SƠ<br />
+                                <p style="font-size: 15px;" class="text-white">
+                                    <span>(Số lượng nhận/Giới hạn nhận hồ sơ)</span>
+                                    <br />
+                                    <span>(0/0)</span>
+                                </p>
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 pl-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                QUẢN LÝ TIN TỨC<br />
+                                <p style="font-size: 15px;" class="text-white">
+                                    <span>(Tổng bài đăng)</span>
+                                    <br />
+                                    <span>(0 bài)</span>
+                                </p>
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="statistics">
+    <h4>Quảng cáo</h4>
+    <div class="row">
+        <div class="col-xl-6 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top ">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                QUẢNG CÁO TRANG CÁ NHÂN<br />
+                            </center>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-6 pl-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                TẠO THÔNG BÁO TRANG CÁ NHÂN<br />
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 pl-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                QUẢNG CÁO TOÀN TRANG<br />
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="statistics">
+    <h4>Thống kê</h4>
+    <div class="row">
+        <div class="col-xl-6 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top ">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                HỒ SƠ<br />
+                            </center>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-6 pl-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                BÀI TUYỂN<br />
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 pl-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                TIN TỨC<br />
+                            </center>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-6 pl-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <button class="btn btn-primary">
+                            <center class="font-weight-bold" style="font-size: 35px">
+                                TRANG CÁ NHÂN<br />
+                            </center>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

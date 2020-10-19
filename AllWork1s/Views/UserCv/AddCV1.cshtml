@@ -1,0 +1,653 @@
+﻿@using AllWork1s.Models;
+@{ 
+    DataWorkEntities db = new DataWorkEntities();
+}
+@{ 
+    List<Career> careers = db.Careers.OrderBy(n => n.career_name).ToList();
+}
+@Html.Action("Css", "Home")
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .set ul li {
+        list-style-type: none;
+    }
+
+    .caa ul li {
+        float: left;
+        margin-left: 20px;
+        list-style-type: none;
+    }
+    .hoverinput{
+        border: 0px solid black;
+        width: 100%;
+    }
+    .hoverinput:hover {
+        border-color: red;
+    }
+    .ui.form input:not([type]), .ui.form input[type=date], .ui.form input[type=datetime-local], .ui.form input[type=email], .ui.form input[type=file], .ui.form input[type=number], .ui.form input[type=password], .ui.form input[type=search], .ui.form input[type=tel], .ui.form input[type=text], .ui.form input[type=time], .ui.form input[type=url] {
+        padding: 0px;
+        line-height: 0px;
+        border: 0px solid black;
+    }
+    .ui.form .field {
+        margin: 0px;
+    }
+    .ui.form select {
+        display: inline;
+        padding: 0px;
+    }
+    .hoverinputem {
+        border: 1px dashed red !important;
+        width: 100%;
+    }
+</style>
+<form class="ui form" method="post" style="font-size: 15px;">
+    <div class="">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header" style="background-color:#7B55FF">
+                    <h1 class="text-center" style="padding: 10px; color: white">Mẫu hồ sơ trắng - Phù hợp với tất cả nghành nghề</h1>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="menuwrap">
+                    <div id="menu">
+                        <div class="" style="margin-left: 8%">
+                            <div class="row">
+                                <br />
+                                <div class="col-lg-12 mt-5 caa">
+                                    <ul>
+                                        <li>
+                                            <button class="ui labeled icon button active" style="height: 50px" onclick="window.location.href='@Url.Action("ViewCV","UserCv")'">
+                                                <i class="left chevron icon"></i>
+                                                Trở về
+                                            </button>
+                                        </li>
+                                        <li>
+                                            -Viết tên CV để dễ dàng quản lý các CV của bạn.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 set">
+                <div id="content" style="background-color: #F2F3F5">
+                    <div id="main" style="margin-top: 8%; background-color: #F2F3F5">
+                        <div class="container" style="max-width: 900px">
+                            <div class="row">
+                                <div class="col-lg-12 mt-5" style="background-color: white">
+                                    <div class="row" style="padding: 20px">
+                                        <div class="col-lg-3">
+                                            <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" style="width: 200px; height: 200px; border-radius: 15px 15px 15px 15px" />
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <h1 class="field"><input type="text" class="hoverinput" name="cv_fullname" id="cv_fullname" value="Huỳnh Minh Tấn" placeholder="Họ và tên" /></h1>
+                                            <p class="field"><input type="text" name="cv_location" id="cv_location" class="hoverinput" placeholder="Vị trí công việc bạn muốn ứng tuyển"></p>
+                                            <ul>
+                                                <li class="field">
+                                                    <b>Ngày sinh: </b> <input type="date" name="cv_bird" id="cv_bird" class="hoverinput" style="width:300px;" />
+                                                </li>
+                                                <li>
+                                                    <b>Giới tính: </b>
+                                                    <select class="hoverinput" style="width: 60px" name="cv_sex">
+                                                        <option value="1">Nam</option>
+                                                        <option value="2">Nữ</option>
+                                                        <option value="3">Khác</option>
+                                                    </select>
+                                                </li>
+                                                <li class="field"><b>Điện thoại: </b> <input type="text" name="cv_phone" id="cv_phone" placeholder="Số điện thoại" class="hoverinputem" style="width: 300px" /><div id="cv_cphone" style="color: red"></div></li>
+                                                <li style="margin-top: 5px" class="field"><b>Email: </b> <input type="email" name="cv_email" placeholder="Email" value="allwork1s@gmail.com" id="cv_email" class="hoverinputem" style="width: 300px"/><div id="cv_cemail" style="color: red"></div></li>
+                                                <li class="field"><b>Địa chỉ: </b> <input type="text" value="25/5 Hiệp An, Bình Dương" placeholder="Địa chỉ" style="width: 300px; border: none" name="cv_address" id="cv_address"/><div id="cv_caddress" style="color: red"></div></li>
+                                                <li class="field"><b>Facebook: </b> <a href="#"><input type="text" name="cv_linkfc" style="width: 400px; border: 0px solid black; color: blue" placeholder="Nhập link facebook" value="https://www.facebook.com/profile.php?id=100009358125256"/></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <br />
+                                            <h4><b>MỤC TIÊU NGHỀ NGHIỆP</b></h4>
+                                            <hr />
+                                            <p>
+                                                <textarea name="cv_target" style="height: 50px; border: none" placeholder="Mục tiêu nghề nghiệp">Áp dụng những kinh nghiệm về kỹ năng bán hàng và sự hiểu biết về thị trường để trở thành một nhân viên bán hàng chuyên nghiệp, mang đến nhiều giá trị cho khách hàng. Từ đó giúp Công ty tăng số lượng khách hàng và mở rộng tập khách hàng.</textarea>
+                                            </p>
+                                            <br />
+                                            <h4><b>HỌC VẤN</b></h4>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="field"><input type="date" name="cv_datebegineducation" value="20/2020" style="border: none" /></div>  <div class="field"><input type="date" name="cv_dateendeducation" value="20/2021" style="border: none" /></div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li class="field"><b><input type="text" value="Đại học AllWork1s" name="cv_schoolname" style="width: 300px; border: none" placeholder="Tên trường học" /></b></li>
+                                                        <li class="field">Chuyên ngành: 
+                                                            <select class="ui search dropdown" name="career_id">
+                                                                <option value="">Chọn chuyên nghành</option>
+                                                                @foreach(var item in careers)
+                                                                {
+                                                                    <option value="@item.career_id">@item.career_name</option>
+                                                                }
+                                                            </select>
+                                                        </li>
+                                                        <li>Tốt nghiệp loại <b><select name="cv_species" style="width: 100px; border: none"><option value="1">Trung bình</option><option value="2">Khá</option><option value="3">Giỏi</option></select></b>, điểm trung bình <b><input type="number" name="cv_point" value="8.0" placeholder="Nhập điểm" style="width: 100px" /></b></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><b>KINH NGHIỆM VIỆC LÀM</b></h4>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="field"><input type="date" name="cv_datebeginexp" value="20/2020" style="border: none" /></div>  <div class="field"><input type="date" name="cv_dateendexp" value="20/2021" style="border: none" /></div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li><b><input type="text" value="Công ty AllWork1s" name="cv_companyname" placeholder="Tên công ty" style="width: 300px; border: none"/></b></li>
+                                                        <li class="field">
+                                                            <textarea placeholder="D9oi6 lời nói về công việc của mình đã làm" name="cv_contentexp" style="height: 30px; border: none    ">- Hỗ trợ viết bài quảng cáo sản phẩm qua kênh facebook, các forum,...
+- Giới thiệu, tư vấn sản phẩm, giải đáp các vấn đề thắc mắc của khách hàng qua điện thoại và email.
+                                                            </textarea>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="field"><input type="date" name="cv_datebeginexptwo" value="20/2020" style="border: none" /></div>  <div class="field"><input type="date" name="cv_dateendexp" value="20/2021" style="border: none" /></div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li><b><input type="text" value="Công ty AllWork1s" name="cv_companynametwo" placeholder="Tên công ty" style="width: 300px; border: none" /></b></li>
+                                                        <li class="field">
+                                                            <textarea placeholder="D9oi6 lời nói về công việc của mình đã làm" name="cv_contentexptwo" style="height: 30px; border: none    ">- Hỗ trợ viết bài quảng cáo sản phẩm qua kênh facebook, các forum,...
+- Giới thiệu, tư vấn sản phẩm, giải đáp các vấn đề thắc mắc của khách hàng qua điện thoại và email.
+                                                            </textarea>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><b>HOẠT ĐỘNG</b></h4>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="field"><input type="date" name="cv_dateendactivate" value="20/2020" style="border: none" /></div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li><b>Nhóm tình nguyện TOPCV</b></li>
+                                                        <li>Tình nguyện viên</li>
+                                                        <li>
+                                                            Tập hợp các món quà và phân phát tới người vô gia cư.
+                                                            <br />
+                                                            - Chia sẻ, động viên họ vượt qua giai đoạn khó khăn, giúp họ có những suy nghĩ lạc quan
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><b>CHỨNG CHỈ</b></h4>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    2013
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li>Giải nhất Tài năng TOPCV</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><b>GIẢI THƯỞNG</b></h4>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    2013
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li>Nhân viên xuất sắc năm công ty TOPCV</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><b>CÁC KỸ NĂNG</b></h4>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <b>Tin học</b>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li>- Sử dụng thành thạo các công cụ Word, Excel, Power Point</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <b>Tiếng Anh</b>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul>
+                                                        <li>- Sử dụng thành thạo các công cụ Word, Excel, Power Point</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h4><b>SỞ THÍCH</b></h4>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    Đọc sách - Mỗi tháng đọc 1 quyển sách về kinh doanh.
+                                                    <br />
+                                                    Đá bóng - Tham gia hoạt động đá bóng của công ty hàng tuần
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="side">
+                        <div id="sidecontent" class="cf" style="height: 866px;width: 400px">
+                            <div class="row" style="padding: 10px">
+                                <div class="col-lg-12">
+                                    <div class="ui link cards">
+                                        <div class="card">
+                                            <div class="content">
+                                                <div class="description" style="margin-top: 5px">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <button type="submit" class="ui red button" style="width: 100%; font-size: 25px">
+                                                                <i class="edit icon">&nbsp;</i>CHẤM ĐIỂM
+                                                            </button>
+                                                            <button type="submit" class="ui primary button" style="width: 100%; font-size: 25px; margin-top: 2%">
+                                                                <i class="save icon">&nbsp;</i>LƯU HỒ SƠ
+                                                            </button>
+                                                            <br />
+                                                            <br />
+                                                            <div class="ui error message" style="color: black"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="footer" class="cf" style="background-color:#F2F3F5 "></div>
+            </div>
+        </div>
+        <style>
+            .navbar {
+                background-color: #333;
+                position: fixed;
+                height: 60px;
+                bottom: 0;
+                width: 100%;
+                border-radius: 0px 0px 0px 0px;
+            }
+
+            .mar ul li {
+                float: left;
+                color: white;
+                margin-left: 10px;
+                list-style-type: none;
+            }
+        </style>
+        <div class="navbar mar">
+            <ul style="margin-top: 10px">
+                <li>
+                    Font chữ:
+                    <select class="ui search dropdown">
+                        <option value=""><a style="color: black">Aria</a></option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District Of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+
+                </li>
+                <li>
+                    Kích cỡ:
+                    <div class="ui icon buttons">
+                        <button class="ui button"><b style="font-size: 15px">A</b></button>
+                        <button class="ui button"><b style="font-size: 20px">A</b></button>
+                        <button class="ui button"><b style="font-size: 25px">A</b></button>
+                    </div>
+
+                </li>
+                <li>
+                    Cách dòng:
+                    <div class="ui icon buttons">
+                        <button class="ui button"><b style="font-size: 15px">&Dagger;</b></button>
+                        <button class="ui button"><b style="font-size: 20px">&Dagger;</b></button>
+                        <button class="ui button"><b style="font-size: 25px">&Dagger;</b></button>
+                    </div>
+                </li>
+                <li>
+                    Đổi ngôn ngữ:
+                    <select class="ui search dropdown">
+                        <option value=""><a style="color: black">Aria</a></option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District Of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </li>
+                <li>
+                    <button class="negative ui button" style="height: 39px">Đổi hồ sơ</button>
+                    <button class="negative ui button" style="height: 39px">Ghi chú</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+        var top = $('#menu,#sidecontent').offset().top - parseFloat($('#menu,#sidecontent').css('marginTop').replace(/auto/, 0));
+        var footTop = $('#footer').offset().top - parseFloat($('#footer').css('marginTop').replace(/auto/, 0));
+
+        var maxY = footTop - $('#menu,#sidecontent').outerHeight();
+
+        $(window).scroll(function (evt) {
+            var y = $(this).scrollTop();
+            if (y > top) {
+                if (y < maxY) {
+                    $('#menu,#sidecontent').addClass('fixed').removeAttr('style');
+                } else {
+                    $('#menu,#sidecontent').removeClass('fixed').css({
+                        position: 'absolute',
+                        top: (maxY - top) + 'px'
+                    });
+                }
+            } else {
+                $('#menu,#sidecontent').removeClass('fixed');
+            }
+        });
+    });
+
+    // Back to top button
+    (function () {
+        $(document).ready(function () {
+            return $(window).scroll(function () {
+                return $(window).scrollTop() > 200 ? $("#back-to-top").addClass("show") : $("#back-to-top").removeClass("show")
+            }), $("#back-to-top").click(function () {
+                return $("html,body").animate({
+                    scrollTop: "0"
+                })
+            })
+        })
+    }).call(this);
+</script>
+
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+        ;
+</script>
+
+<script>
+    $('.ui')
+        .form({
+            fields: {
+                cv_fullname: {
+                    identifier: 'cv_fullname',
+                    rules: [
+                        {
+                            type: 'minLength[5]',
+                            prompt: 'Viết đầy đủ họ và <b style="color:red">tên</b> của bạn! VD: Huỳnh Minh Tấn.'
+                        }
+                    ]
+                },
+                cv_location: {
+                    identifier: 'cv_location',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Nhập <b style="color: red">vị trí công việc</b> bạn muốn ứng tuyển.'
+                        }
+                    ]
+                },
+                cv_bird: {
+                    identifier: 'cv_bird',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Nhập rõ <b style="color: red">ngày, tháng, năm</b> sinh.'
+                        }
+                    ]
+                },
+                cv_phone: {
+                    identifier: 'cv_phone',
+                    rules: [
+                        {
+                            type: 'regExp',
+                            value: /^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/i,
+                            prompt: 'Vui lòng nhập <b style="color: red">số điện thoại</b>.'
+                        }
+                    ]
+                },
+                cv_address: {
+                    identifier: 'cv_address',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '<b style="color: red">Địa chỉ</b> không được để trống.'
+                        }
+                    ]
+                },
+                cv_linkfc: {
+                    identifier: 'cv_linkfc',
+                    rules: [
+                        {
+                            type: 'regExp',
+                            value: /(?:http:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/,
+                            prompt: 'Vui lòng nhập đúng đường dẫn link cá nhân facebook.'
+                        }
+                    ]
+                },
+                cv_target: {
+                    identifier: 'cv_target',
+                    rules: [
+                        {
+                            type: 'minLength[10]',
+                            prompt: '<b style="color: red">Mục tiêu nghề nghiệp</b> không ngắn. Phải trên 10 ký tự.'
+                        }
+                    ]
+                },
+                cv_datebegineducation: {
+                    identifier: 'cv_datebegineducation',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày vào trường không để trống.'
+                        }
+                    ]
+                },
+                cv_dateendeducation: {
+                    identifier: 'cv_dateendeducation',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày ra trường không để trống.'
+                        }
+                    ]
+                },
+                cv_schoolname: {
+                    identifier: 'cv_schoolname',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên trường học không để trống.'
+                        }
+                    ]
+                },
+                career_id: {
+                    identifier: 'career_id',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng chọn nghành nghề.'
+                        }
+                    ]
+                },
+                cv_point: {
+                    identifier: 'cv_point',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập <b style = "color: red">Điểm</b>.'
+                        }
+                    ]
+                },
+                cv_datebeginexp: {
+                    identifier: 'cv_datebeginexp',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày vào công ty không để trống.'
+                        }
+                    ]
+                },
+                cv_dateendexp: {
+                    identifier: 'cv_dateendexp',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày rời công ty không để trống.'
+                        }
+                    ]
+                },
+                cv_contentexp: {
+                    identifier: 'cv_contentexp',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Nội dung làm ở công ty không để trống.'
+                        }
+                    ]
+                },
+                cv_companyname: {
+                    identifier: 'cv_companyname',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Tên công ty đã từng làm không được để trống.'
+                        }
+                    ]
+                },
+                cv_dateendactivate: {
+                    identifier: 'cv_dateendactivate',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Ngày tình nguyện không để trống.'
+                        }
+                    ]
+                }
+
+
+
+            }
+        })
+        ;
+
+</script>

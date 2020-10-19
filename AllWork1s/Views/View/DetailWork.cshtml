@@ -1,0 +1,271 @@
+﻿@using AllWork1s.Models;
+@model Work
+@{
+    User user = (User)Session["user"];
+    ViewBag.Title = "DetailWork";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DataWorkEntities db = new DataWorkEntities();
+}
+@{ 
+    List<Work> works = db.Works.Where(n=>n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.career_id == Model.career_id && n.work_id != Model.work_id).OrderByDescending(n=>n.work_datecreated).Take(5).ToList();
+    List<Work> worksall = db.Works.Where(n=>n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.employer_id == Model.employer_id && n.work_id != Model.work_id).OrderByDescending(n=>n.work_datecreated).Take(5).ToList();
+}
+@Html.Action("Css","Home")
+<section class="w3l-specification-6">
+    <div class="specification-layout">
+        <div class="container" style="max-width: 1500px">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card" style="border-radius: 0px 0px 0px 0px">
+                        <div class="row" style="padding: 30px">
+                            <div class="col-lg-2">
+                                <img src="~/Images/Employer/@Model.Employer.employer_logo" class="w-100 shadow" style="height: 120px" />
+                            </div>
+                            <div class="col-lg-8">
+                                <h3 style="font-size: 20px">@Model.Employer.employer_company</h3>
+                                <p>
+                                    <b class="font-weight-bold">Chi nhánh chính: </b> @Model.Employer.Province.province_name<br />
+                                    <a href="#">Trang cá nhân...</a>
+                                </p>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="ui default button w-100"><i class="fa fa-heart">&nbsp;</i>Lưu việc làm này</button>
+                                <button class="ui blue basic button mt-2 w-100"><i class="fa fa-share">&nbsp;</i>Chia sẻ</button>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .menuca ul li{
+                            float: left;
+                            margin-left: 20px;
+                        }
+                    </style>
+                    <div class="card" style="border-radius: 0px 0px 0px 0px">
+                        <div style="padding: 10px">
+                            <div class="nav-wrapper">
+                                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                                    <li class="nav-item">
+                                        <a  style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fas fa-info">&nbsp;</i>Thông tin việc làm</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="fas fa-briefcase">&nbsp;</i>Việc làm cùng công ty @(worksall.Count == 0 ? "" : " ("+worksall.Count+")")</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" href="https://getbootstrap.com/docs/4.5/utilities/borders/"><i class="fas fa-building">&nbsp;</i>Thông tin công ty</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="border-radius: 0px 0px 0px 0px">
+                        <div class="row" style="padding: 30px">
+                            <div class="col-lg-12">
+                                <div class="">
+                                    <div class="">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+                                                <div class="col-lg-12 mt-4">
+                                                    <style>
+                                                        .pad p {
+                                                            margin-top: -2%;
+                                                        }
+                                                    </style>
+                                                    <div class="row pad">
+                                                        <div class="col-lg-9">
+                                                            <h3 class="text-danger">@Model.work_name</h3>
+                                                            <h3>
+                                                                @Model.work_pricemin - @Model.work_pricemax @Model.work_symbol
+                                                            </h3>
+                                                            <h3>Mô tả công viêc:</h3>
+                                                            <br />
+                                                            @Html.Raw(Model.work_description)
+                                                            <h3>Yêu cầu công viêc:</h3>
+                                                            <br />
+                                                            @Html.Raw(Model.work_request)
+                                                            <h3>Quyền lợi:</h3>
+                                                            <br />
+                                                            @Html.Raw(Model.work_benefit)
+                                                            <h3>CÁCH THỨC ỨNG TUYỂN:</h3>
+                                                            <br />
+                                                            <p>Ứng viên nộp hồ sơ trực tuyến bằng cách bấm <b class="text-danger">Ứng tuyển bằng CV</b> hoặc <b class="text-danger">Ứng tuyển không CV</b> dưới đây.</p>
+                                                            <center>
+                                                                <div class="ui red button" style="font-size: 17px">NỘP ĐƠN BẰNG CV</div>
+                                                                <div class="ui green button" style="font-size: 17px">NỘP ĐƠN KHÔNG CV</div>
+                                                                <br />
+                                                                <br />
+                                                                <b><span class="text-warning"><i class="fas fa-exclamation-triangle">&nbsp;</i></span>Phản ánh tin tuyển dụng không chính xác</b>
+                                                            </center>
+                                                        </div>
+                                                        <style>
+                                                            .caexp ul li {
+                                                                margin-top: 15px;
+                                                                font-size: 16px;
+                                                            }
+                                                        </style>
+                                                        <div class="col-lg-3 caexp">
+                                                            <br />
+                                                            <div class="ui red button w-100" style="font-size: 17px">NỘP ĐƠN BẰNG CV</div>
+                                                            <h4 class="text-center">hoặc</h4>
+                                                            <div class="ui green button w-100" style="font-size: 17px">NỘP ĐƠN KHÔNG CV</div>
+                                                            <h4 class="text-center"><b class="text-warning">Hạn nộp: </b> @Model.work_datesend.Value.Day - @Model.work_datesend.Value.Month - @Model.work_datesend.Value.Year</h4>
+                                                            <br />
+                                                            <ul>
+                                                                <li><b>Vị trí: </b><br /> @Model.Province.province_name</li>
+                                                                <li><b>Map: </b><br /> <a href="#">Chỉ đường đi</a></li>
+                                                                <li><b>Năm kinh nghiệm: </b><br /> @(Model.work_yearsofexp == null ? "Không cần kinh nghiệm" : Model.work_yearsofexp + " Năm")</li>
+                                                                <li>
+                                                                    <b>Giới tính cần: </b><br />
+                                                                    @if (Model.work_sex == 0)
+                                                                    {
+                                                                        <span>Không yêu cầu</span>
+                                                                    }
+                                                                    else if (Model.work_sex == 1)
+                                                                    {
+                                                                        <span>Nam</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span>Nữ</span>
+                                                                    }
+                                                                </li>
+                                                                <li><b>Loại hình: </b><br /> @Model.Form.form_name</li>
+                                                                <li><b>Nghành nghề: </b><br /> @Model.Career.career_name</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
+                                                <div class="row">
+                                                    <h5>Tổng cộng có <b class="text-danger">@worksall.Count</b> công việc thuộc công ty "@Model.Employer.employer_company"</h5>
+                                                    <br />
+                                                    <br />
+                                                    @foreach (var item in worksall)
+                                                    {
+                                                        <div class="col-lg-12" style="margin-top: 1px;">
+                                                            <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
+                                                                <div class="ui divided items w-100">
+                                                                    <div class="item">
+                                                                        <div class="image">
+                                                                            <div class="ui two column grid">
+                                                                                <div class="column w-100">
+                                                                                    <div class="ui fluid image">
+                                                                                        <a class="ui left corner label text-danger">
+                                                                                            <i class="heart icon"></i>
+                                                                                        </a>
+                                                                                        <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="content" style="font-size: 10px">
+                                                                            <a class="header" href="@Url.Action("DetailWork","View",new { id = item.work_id })">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0, 40) + "...")</a>
+                                                                            <div class="meta">
+                                                                                <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
+                                                                            </div>
+                                                                            <div class="description">
+                                                                                <p>
+                                                                                    <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="extra">
+                                                                                <div class="ui right floated">
+                                                                                    <a class="ui red tag label">HOT</a>
+                                                                                </div>
+                                                                                <div class="ui">
+                                                                                    @if (user != null)
+                                                                                    {
+
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <a class="text-primary"><i class="fa fa-dollar">&nbsp;</i>Đăng nhập xem lương</a>
+                                                                                    }
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                                                <p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card caexp" style="padding: 20px">
+                        <ul>
+                            <li>
+                                <b>Thông tin công ty:</b>
+                                <br />
+                                Chúng tôi chuyên phát triển lĩnh vực <a href="#">@Model.Employer.Career.career_name</a> với hơn <b>1000</b> nhân viên, hãy là 1 thành viên trong công ty chúng tôi. Chúng tôi "@Model.Employer.employer_name" sẽ giúp bạn phát triển bản thân.
+                            </li>
+                            <li>
+                                <hr />
+                                <b>Website:</b>
+                                <br />
+                                <a href="#">https://fpt.com</a>
+                            </li>
+                            <li>
+                                <b>Địa chỉ:</b>
+                                <br />
+                                @Model.work_address
+                            </li>
+                            <li>
+                                <b>Số lượng cần tuyển:</b>
+                                <br />
+                                Còn <b class="text-danger">@Model.work_amount</b> ứng viên cần tuyển
+                            </li>
+                            <li>
+                                <b>Hình thức làm việc:</b>
+                                <br />
+                                @Model.Form.form_name
+                            </li>
+                            <li>
+                                <b>Yêu cầu kinh nghiệm:</b>
+                                <br />
+                                @(Model.work_yearsofexp == null ? "Không yêu cầu" : Model.work_yearsofexp + " Năm")
+                            </li>
+                            <li>
+                                <hr />
+                                <b>Các công việc liên quan đến "<a href="#">@Model.Employer.Career.career_name</a>"</b>
+                                <br />
+                                <br />
+                                <div class="row">
+                                    @foreach(var item in works)
+                                    {
+                                        <div class="col-lg-12 border-bottom">
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-lg-4" style="padding: 0px">
+                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" class="w-100" style="height: 50px"/>
+                                                </div>
+                                                <div class="col-lg-8" style="padding: 0px">
+                                                    <a href="@Url.Action("DetailWork","View",new { id = item.work_id })">
+                                                        <b style="color: black">@(Model.work_name.Length < 20 ? Model.work_name : Model.work_name.Substring(0,20)+"...")</b>
+                                                    </a>
+                                                    <div>@(Model.Employer.employer_company.Length < 20 ? Model.Employer.employer_company : Model.Employer.employer_company.Substring(0,20)+"...")</div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                        </div>
+                                    }
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

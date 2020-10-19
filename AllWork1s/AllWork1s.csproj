@@ -51,12 +51,36 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Data, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Data.1.0.0\lib\net40\FSharp.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveReload.NET, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveReload.NET.1.0.3\lib\net45\LiveReload.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.1.1.4\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Owin, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Owin.1.1.4\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.1.1.4\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.1.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.5.24.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Tpl.Dataflow.4.5.24\lib\portable-net45+win8+wpa81\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -110,6 +134,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="vtortola.WebSockets, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\vtortola.WebSocketListener.1.0.0\lib\net45\vtortola.WebSockets.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -142,8 +169,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Employer\EmployerAreaRegistration.cs" />
+    <Compile Include="Areas\EmployerUse\Controllers\EmployerController.cs" />
+    <Compile Include="Areas\EmployerUse\Controllers\HomeEmployerController.cs" />
+    <Compile Include="Areas\EmployerUse\Controllers\ViewEmployerController.cs" />
+    <Compile Include="Areas\EmployerUse\EmployerUseAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\TestCode3\CvsController.cs" />
+    <Compile Include="Controllers\TestCode3\EmployersController.cs" />
+    <Compile Include="Controllers\TestCode3\UsersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserCvController.cs" />
+    <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +240,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Error\Style.css" />
     <Content Include="Content\fontawesome-free-5.14.0-web\css\all.css" />
     <Content Include="Content\fontawesome-free-5.14.0-web\css\all.min.css" />
     <Content Include="Content\fontawesome-free-5.14.0-web\css\brands.css" />
@@ -1866,6 +1905,91 @@
     <Content Include="Content\Layout\js\popper.min.js" />
     <Content Include="Content\Layout\js\script.js" />
     <Content Include="Content\Layout\videos\video.mp4" />
+    <Content Include="Content\LayoytEmployer\Accout\css\style.css" />
+    <Content Include="Content\LayoytEmployer\Accout\images\bbb.jpg" />
+    <Content Include="Content\LayoytEmployer\Accout\images\group.png" />
+    <Content Include="Content\LayoytEmployer\Accout\images\l.png" />
+    <Content Include="Content\LayoytEmployer\Accout\images\m.png" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\css\style-starter.css" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\1.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\2.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\3.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\4.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\ab1.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\app.png" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\b1.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\b2.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\b3.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\b4.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\b5.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\b6.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\dots.png" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\down.png" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\t1.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\t2.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\t3.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\t4.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\t5.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\t6.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\team1.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\team2.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\team3.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\images\team4.jpg" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\all.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\app.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\bootstrap.min.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\jquery.countup.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\jquery.magnific-popup.min.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\jquery.min.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\jquery.waypoints.min.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\jquery.zoomslider.min.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\main.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\modernizr-2.6.2.min.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\owl.carousel1.js" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\js\popper.min.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\css\style-starter.css" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\avatar1.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\avatar2.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\avatar3.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\avatar4.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\avatar5.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\avatar6.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\avatar7.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\cart.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\content.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\dashboard.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\desk.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\down.png" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\logo.png" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\people1.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\people2.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\people3.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\people4.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\Preloader_11.gif" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\profileimg-big.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\profileimg.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\sort_asc.png" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\sort_both.png" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\sort_desc.png" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\team.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\team2.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\team3.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\team4.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\template1.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\images\template2.jpg" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\bar.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\bootstrap.min.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\Chart.min.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\jquery-1.10.2.min.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\jquery.nicescroll.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\linechart.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\modernizr.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\scripts.js" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\js\utils.js" />
     <Content Include="Content\Semantic-UI-CSS-master\components\accordion.css" />
     <Content Include="Content\Semantic-UI-CSS-master\components\accordion.js" />
     <Content Include="Content\Semantic-UI-CSS-master\components\accordion.min.css" />
@@ -2017,11 +2141,14 @@
     <Content Include="Content\Semantic-UI-CSS-master\themes\default\assets\fonts\icons.svg" />
     <Content Include="Content\Semantic-UI-CSS-master\themes\default\assets\fonts\outline-icons.svg" />
     <Content Include="Content\Semantic-UI-CSS-master\themes\default\assets\images\flags.png" />
+    <Content Include="Content\Style.css" />
     <Content Include="Content\UI\css\argon-design-system.css" />
     <Content Include="Content\UI\css\argon-design-system.min.css" />
     <Content Include="Content\UI\css\font-awesome.css" />
     <Content Include="Content\UI\css\nucleo-icons.css" />
     <Content Include="Content\UI\css\nucleo-svg.css" />
+    <Content Include="Content\UI\Img\pe-icon-7-stroke.css" />
+    <Content Include="Content\UI\Img\rotating-card.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2033,6 +2160,7 @@
     <Content Include="Images\AdEmployer\qc1.jpg" />
     <Content Include="Images\AdEmployer\shinhan-bank-viet-nam-tuyen-chuyen-vien-tu-van-tin-dung.jpg" />
     <Content Include="Images\Cv\32644928_2062295167425734_7686714948314988544_o.jpg" />
+    <Content Include="Images\Cv\ImgCard\mau-cv-default.jpg" />
     <Content Include="Images\Employer\10916680.png" />
     <Content Include="Images\Employer\20170701_7-câu-hỏi-nhà-tuyển-dụng-muốn-nghe-sau-phỏng-vấn.png" />
     <Content Include="Images\Employer\aa1.png" />
@@ -2059,10 +2187,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Employer\Views\web.config" />
     <Content Include="Content\Layout\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Layout\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Layout\fonts\fontawesome-webfont.woff" />
@@ -2148,12 +2278,38 @@
     <Content Include="Content\fontawesome-free-5.14.0-web\webfonts\fa-solid-900.woff2" />
     <Content Include="Content\UI\css\argon-design-system.css.map" />
     <Content Include="Content\UI\css\desktop.ini" />
+    <Content Include="Content\Style.scss" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Areas\EmployerUse\Views\web.config" />
+    <Content Include="Areas\EmployerUse\Views\HomeEmployer\Index.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\Employer\Accout.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\Employer\Login.cshtml" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\LayoytEmployer\LayoutEmoloyer\fonts\FontAwesome.otf" />
+    <Content Include="Areas\EmployerUse\Views\Shared\_LayoutEmployer.cshtml" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\LayoytEmployer\HomeEmployer\fonts\FontAwesome.otf" />
+    <Content Include="Areas\EmployerUse\Views\ViewEmployer\Index.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\ViewEmployer\Header.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\ViewEmployer\Manager.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\ViewEmployer\Error.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\Employer\RegEmployer.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-1.1.4.js" />
+    <Content Include="Scripts\jquery.signalR-1.1.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2174,15 +2330,34 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Css.cshtml" />
+    <Content Include="Views\View\AllWork.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\View\Menu.cshtml" />
+    <Content Include="Views\User\CreateUser.cshtml" />
+    <Content Include="Views\Setting\UserWork.cshtml" />
+    <Content Include="Views\UserCv\ViewCV.cshtml" />
+    <Content Include="Views\UserCv\AddCV1.cshtml" />
+    <Content Include="Views\Shared\_Work.cshtml" />
+    <Content Include="Views\Home\Ses.cshtml" />
+    <Content Include="Views\View\AllEmployer.cshtml" />
+    <Content Include="Views\User\PersonalInformation.cshtml" />
+    <Content Include="Views\View\DetailWork.cshtml" />
+    <Content Include="Views\View\DetailEmployer.cshtml" />
+    <Content Include="Views\Employers\Create.cshtml" />
+    <Content Include="Views\Employers\Delete.cshtml" />
+    <Content Include="Views\Employers\Details.cshtml" />
+    <Content Include="Views\Employers\Edit.cshtml" />
+    <Content Include="Views\Employers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Employer\Controllers\" />
-    <Folder Include="Areas\Employer\Data\" />
-    <Folder Include="Areas\Employer\Views\Shared\" />
+    <Folder Include="Areas\EmployerUse\Data\" />
+    <Folder Include="Areas\EmployerUse\Views\View\" />
+    <Folder Include="Views\CV\" />
+    <Folder Include="Views\Search\" />
     <Folder Include="Views\UI\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,151 @@
+﻿@using AllWork1s.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+    Employer employer = (Employer)Session["employer"];
+    DataWorkEntities db = new DataWorkEntities();
+}
+@{ 
+    //dem so luong hồ sơ
+    List<Cv> countcvall = db.Cvs.Where(n => n.cv_activate == true && n.cv_option == true).ToList();
+    //Dem so luong ho so theo nghành nghe
+    List<Cv> countcvcareer = db.Cvs.Where(n => n.cv_activate == true && n.cv_option == true && n.career_id == employer.career_id).ToList();
+    //Dem so luong bai viet da dang
+    List<Work> countworkid = db.Works.Where(n => n.employer_id == employer.employer_id).ToList();
+    //Danh sach danh muc
+    List<Career> careers = db.Careers.OrderByDescending(n => n.career_name).ToList();
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+    </ol>
+</nav>
+<div class="welcome-msg pt-3 pb-4">
+    <h1>Chào <span class="text-primary">@employer.employer_name</span>, Quay trở lại với trình quản lý thông minh AllWork1s</h1>
+    <p>
+        @if (employer.employer_version == 3)
+        {
+            <b class="text-danger">Phiên bản cao cấp</b>
+        }
+        else if (employer.employer_version == 2)
+        {
+            <b class="text-danger">Phiên bản bình thường</b>
+        }
+        else
+        {
+            <b class="text-danger">Phiên bản miễn phí</b>
+        }
+    </p>
+</div>
+
+<!-- statistics data -->
+<div class="statistics">
+    <div class="row">
+        <div class="col-xl-12 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top p-4">
+                        <h5>Thống kê</h5>
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <b style="font-size: 20px">Tổng số ứng viên</b><br />
+                                <b style="font-size: 20px; color: darkslategray">1.200.102</b>
+                            </div>
+                            <div class="col-lg-4">
+                                <b style="font-size: 20px">1 tháng gần đây</b><br />
+                                <b style="font-size: 20px; color: darkcyan">200.200</b>
+                            </div>
+                            <div class="col-lg-4">
+                                <b style="font-size: 20px">Ngày hôm nay</b><br />
+                                <b style="font-size: 20px; color: crimson">4.000</b>
+                            </div>
+                            <div class="col-lg-12 mt-4">
+                                <b style="font-size: 25px">Ứng viên hôm nay</b><br />
+                                @for (var i = 0; i < 15; i++)
+                                {
+                                    <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" style="width: 40px; height: 40px; border-radius: 50%" />
+                                }
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                                <center>
+                                    <button class="btn btn-danger" style="font-size: 25px"><i class="fas fa-search">&nbsp;</i>Tìm ứng viên ngay</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top p-4">
+                        <h5>Tin tuyển dụng</h5>
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-12 mt-2">
+                                <center>
+                                    <b>Bạn còn <span style="color: red">@(employer.employer_limit - countworkid.Count)</span> bài tuyển nữa. Đăng bài tuyển, tuyển ứng viên.</b><br />
+                                    <button class="btn btn-danger mt-2" style="font-size: 25px">Đăng bài tuyển</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card_border border-primary-top p-4 mt-1">
+                        <h5>Việc làm chuyên nghành</h5>
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-12 mt-1">
+                                <center>
+                                    <button class="btn btn-danger mt-1" style="font-size: 25px">Tìm ứng viên chuyên nghành</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //statistics data -->
+<div class="chart">
+    <div class="row">
+        <div class="col-lg-6 pr-lg-2 chart-grid">
+            <div class="card text-center card_border">
+                <div class="card-header chart-grid__header">
+                    Danh mục ứng viên theo nghành nghề
+                </div>
+                <div class="card-body" style="text-align: left">
+                    <ul>
+                        @foreach (var item in careers)
+                        {
+                            <li>@item.career_name</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 pl-lg-2 chart-grid">
+            <div class="card text-center card_border">
+                <div class="card-header chart-grid__header">
+                    Tính năng khác
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-primary">Hồ sơ nhận</button>
+                    <button class="btn btn-primary">Quảng cáo</button>
+                    <button class="btn btn-primary">Đăng tin tức</button>
+                </div>
+            </div>
+            <div class="card text-center card_border mt-2">
+                <div class="card-header chart-grid__header">
+                    Tin tức cho nhà tuyển dụng
+                </div>
+                <div class="card-body">
+                    Trống
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

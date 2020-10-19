@@ -1,0 +1,47 @@
+﻿@using AllWork1s.Models;
+@model List<Career>
+@{
+    ViewBag.Title = "UsweWork";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User user = (User)Session["user"];
+}
+@Html.Action("Css", "Home")
+<div class="w3l-hero-headers-9">
+    <section class="slide slide-one">
+        <div class="container" style="max-width: 1150px">
+            <!-- <div class="row"> -->
+            <div class="row">
+                <form method="post" action="">
+                    <div class="banner-text col-lg-12">
+                        <h5>Chào @user.user_nicename ! Chọn nghành nghề phù hợp để AllWork1s giúp bạn tìm việc phù hợp nhé</h5>
+                        <p>
+                            <div class="row">
+                                <div class="col-lg-11">
+                                    <select class="ui search dropdown w-100 text-black" name="career_id">
+                                        <option value="">Nghành nghề chính</option>
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.career_id">@item.career_name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </p>
+                        <button type="submit" class="ui inverted button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cài đặt nghành nghề</font></font></button>
+                    </div>
+                </form>
+                <div class="image-postion col-lg-7" style="padding: 0px 0px 0px 0px">
+                    
+                </div>
+
+            </div>
+            <!-- </div> -->
+        </div>
+    </section>
+</div>
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+        ;
+</script>
+

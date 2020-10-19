@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Action("Css", "Home")
+<div class="w3l-hero-headers-9">
+    <section class="slide slide-one">
+        <div class="container">
+            <!-- <div class="row"> -->
+            <div class="row" style="margin-top: -10%">
+                <div class="col-lg-2">
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div style="padding: 10px">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h2 class="text-center">Đăng nhập bằng</h2>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="col-lg-6 mt-1">
+                                    <button class="ui facebook button w-100">
+                                        <i class="facebook icon"></i>
+                                        Facebook
+                                    </button>
+                                </div>
+                                <div class="col-lg-6 mt-1">
+                                    <button class="ui google plus button w-100">
+                                        <i class="google plus icon"></i>
+                                        Google Plus
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="ui form" style="padding: 20px" method="post">
+                            <p class="text-center">Hoặc đăng nhập bằng tài khoản AllWork1s</p>
+                            <div class="text-center text-danger">@ViewBag.Mes</div>
+                            <div class="field">
+                                <label>Email</label>
+                                <input placeholder="allwork1s@gmail.com" name="user_email" type="email">
+                            </div>
+                            <div class="field">
+                                <label>Mật khẩu</label>
+                                <input placeholder="******************" name="user_pass" type="password">
+                                <a href="" class="float-right mt-4">Quên mật khẩu?</a>
+                            </div>
+                            <div class="inline field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="terms">
+                                    <label>Nhớ mật khẩu</label>
+                                </div>
+                            </div>
+                            <div class="ui primary submit button w-100">Đăng nhập</div>
+                            <center class="mt-4">Chưa có tài khoản? <a href="@Url.Action("CreateUser","User")">Đăng ký</a></center>
+                            <div class="ui error message"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+    </section>
+</div>
+<script>
+    $('.ui.form')
+  .form({
+    fields: {
+      user_email: {
+        identifier: 'user_email',
+        rules: [
+          {
+            type   : 'email',
+            prompt : 'Email không đúng định dạng'
+          }
+        ]
+      },
+      user_pass: {
+        identifier: 'user_pass',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Mật khẩu không để trống'
+          }
+        ]
+      }
+    }
+  })
+;
+</script>

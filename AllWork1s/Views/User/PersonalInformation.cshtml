@@ -1,0 +1,439 @@
+﻿@using AllWork1s.Models;
+@model User
+@{
+    ViewBag.Title = "PersonalInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DataWorkEntities db = new DataWorkEntities();
+    string pass = Model.user_pass;
+}
+@{
+    List<Work> works = db.Works.ToList();
+}
+@Html.Action("Css", "Home")
+<section class="w3l-teams-15">
+    <div class="team-single-main">
+        <div class="container" style="max-width: 1300px">
+            <div class=" grid grid-column-2 row">
+                <div class="col-lg-12">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="">
+                                    <div style="">
+                                        <div class="row">
+                                            <div class="col-lg-12" style="background-image: url('../../Images/User/mau-background-don-gian-01-1024x640.jpg');height: 200px; width: 100%; background-repeat: no-repeat; background-size: 100% 100%">
+                                                <button class="ui right floated button mt-2"><i class="fa fa-image">&nbsp;</i>Cập nhật ảnh nền</button>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" style="width: 180px; height: 180px; border-radius: 50%; margin-top: -50%; margin-left: 5%" />
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <h1 class="mt-3">Tài khoản: @Model.user_nicename</h1>
+                                                        <p>
+                                                            Tài khoản miển phí ! <a href="#" class="text-danger">Chi tiết phiên bản nâng cấp&nbsp;<i class="fas fa-level-up-alt"></i></a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <hr />
+                                                <style>
+                                                    ul li {
+                                                        margin-top: 1%;
+                                                    }
+                                                </style>
+                                                <p class="text-warning font-weight-bold">
+                                                    <u>Thông tin cá nhân</u>
+                                                </p>
+                                                <ul style="margin-left: 5%">
+                                                    <li style="font-size: 20px"><b><i class="fa fa-mail-bulk">&nbsp;</i>Email: </b>@Model.user_email</li>
+                                                    <li style="font-size: 20px"><b><i class="fa fa-user">&nbsp;</i>Tên hiển thị: </b>@Model.user_nicename <b><a href="#" style="font-size: 12px;" class="text-primary" data-toggle="modal" data-target="#editprofile"><i class="fas fa-cog"></i></a></b></li>
+                                                    <li style="font-size: 20px"><b>Chuyên nghành yêu thích: </b>@(Model.user_industryloving == null ? "Trống" : Model.user_industryloving)&nbsp;<b><a href="#" style="font-size: 12px;" class="text-primary" data-toggle="modal" data-target="#editprofile"><i class="fas fa-cog"></i></a></b></li>
+                                                    <li style="font-size: 20px"><b>Kỹ năng yêu thích: </b>@(Model.user_skill == null ? "Trống" : Model.user_skill)&nbsp;<b><a href="#" style="font-size: 12px;" class="text-primary"><i class="fas fa-cog" data-toggle="modal" data-target="#editprofile"></i></a></b></li>
+                                                    <li style="font-size: 20px"><b>Sở thích: </b>@(Model.user_interests == null ? "Trống" : Model.user_interests)&nbsp;<b><a href="#" style="font-size: 12px;" class="text-primary"><i class="fas fa-cog" data-toggle="modal" data-target="#editprofile"></i></a></b></li>
+                                                </ul>
+                                                <hr />
+                                                <p class="text-warning font-weight-bold">
+                                                    <u>Thông tin tài khoản</u>
+                                                </p>
+                                                <ul style="margin-left: 5%">
+                                                    <li style="font-size: 20px"><b>Ngày tạo tài khoản: </b>@Model.user_datecreated</li>
+                                                    <li style="font-size: 20px"><b>Ngày đăng nhập mới nhất: </b>@Model.user_datelogin</b></li>
+                                                    <li style="font-size: 20px"><b>Tình trạng: </b>@(Model.user_activate == true ? "Hoạt động" : "Ngừng hoạt động")</li>
+                                                </ul>
+                                                <hr />
+                                                <p class="text-warning font-weight-bold">
+                                                    <u>Thông tin việc làm</u>
+                                                </p>
+                                                <ul style="margin-left: 5%">
+                                                    <li style="font-size: 20px"><b>Đã nộp: </b>0 hồ sơ</li>
+                                                    <li style="font-size: 20px"><b>Bị hủy: </b>0 hồ sơ</li>
+                                                    <li style="font-size: 20px"><b>Được ứng tuyển: </b>0 hồ sơ</li>
+                                                    <li style="font-size: 20px"><b>Được nhà tuyển dụng chọn: </b>0 hồ sơ</li>
+                                                </ul>
+                                                <hr />
+                                                <p class="text-warning font-weight-bold">
+                                                    <u>Thông tin bài viết</u>
+                                                </p>
+                                                <ul style="margin-left: 5%">
+                                                    <li style="font-size: 20px"><b>Đã đăng: </b>0 bài viết</li>
+                                                    <li style="font-size: 20px"><b>Số lần comment bài viết người khác: </b>0 lần</li>
+                                                    <li style="font-size: 20px"><b>Số lần trả lời bài biết người khác: </b>0 lần</li>
+                                                    <li style="font-size: 20px"><b>Số lần được trả lời: </b>0 lần</li>
+                                                </ul>
+                                                <hr />
+                                                <center>
+                                                    <button class="ui red button" data-toggle="modal" data-target="#editpass"><i class="fa fa-key">&nbsp;</i>Đổi mật khẩu</button>
+                                                    <button class="ui orange button" data-toggle="modal" data-target="#editprofile"><i class="fa fa-user">&nbsp;</i>Đổi thông tin</button>
+                                                    <button class="ui primary button" data-toggle="modal" data-target="#editavatar"><i class="fa fa-image">&nbsp;</i>Cập nhật hình ảnh</button>
+                                                    <button class="ui black button"><i class="fa fa-cog">&nbsp;</i>Cài đặt</button>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div style="padding: 20px">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" style="width: 100px; border-radius: 50%" />
+                                                <center><span style="font-size: 13px">Cập nhật ảnh</span></center>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <p class="mt-3">
+                                                    Chào bạn trở lại,<br />
+                                                    <b class="font-weight-bold" style="font-size: 20px">@Model.user_nicename</b><br /><br />
+                                                    <b style="font-size: 15px">Tài khoản miển phí</b><br />
+                                                    <button class="ui red button w-100 mt-1">Nâng cấp tài khoản</button>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-12 mt-4">
+                                                <div class="ui left floated compact">
+                                                    <div class="ui fitted toggle checkbox w-100">
+                                                        <input type="checkbox" style="border: 1px solid red">
+                                                        <label><b style="margin-left: 30%; font-size: 20px;" class="text-danger">Trạng thái tìm việc đang tắt</b></label>
+                                                    </div>
+                                                </div>
+                                                <p class="mt-4">
+                                                    Bật tìm việc để nhận được việc làm tốt nhất từ AllWork1s. Hồ sơ của bạn sẽ được kích hoạt cho nhà tuyển dụng.
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-12 mt-4">
+                                                <div class="ui left floated compact">
+                                                    <div class="ui fitted toggle checkbox w-100">
+                                                        <input type="checkbox" checked>
+                                                        <label><b style="margin-left: 30%; font-size: 20px;" class="text-danger">Việc ưu tiên cho NTD</b></label>
+                                                    </div>
+                                                </div>
+                                                <p class="mt-4">
+                                                    Hệ thống sẽ cập nhật thông tin hồ sơ của bạn và hiển thị vào các trang quản lý của nhà tuyển dụng.
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-12 mt-4">
+                                                <i class="fa fa-bell">&nbsp;</i>(0 thông báo từ NTD)
+                                                <hr />
+                                                <button class="ui red button w-100"><i class="fa fa-cog">&nbsp;</i>Cài đặt ưu tiên việc làm</button>
+                                                <button class="ui green button w-100 mt-2"><i class="fa fa-edit">&nbsp;</i>Tạo hồ sơ cv chuyện nghiệp</button>
+                                            </div>
+                                            <div class="col-lg-12 mt-4">
+                                                <hr />
+                                                <center>
+                                                    <b style="font-size: 20px">Việc làm có thể bạn thích</b>
+                                                </center>
+                                                <div class="row">
+                                                    @foreach (var item in works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.career_id == Model.career_id).OrderByDescending(n => n.work_datecreated).Take(4))
+                                                    {
+                                                        <div class="col-lg-12 hovercard" style="margin-top: 1px; padding: 6px;">
+                                                            <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
+                                                                <div class="ui divided items w-100">
+                                                                    <div class="item">
+                                                                        <div class="image">
+                                                                            <div class="ui two column grid">
+                                                                                <div class="column w-100">
+                                                                                    <div class="ui fluid image">
+                                                                                        <a class="ui left corner label text-danger">
+                                                                                            <i class="heart icon"></i>
+                                                                                        </a>
+                                                                                        <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="content" style="font-size: 10px">
+                                                                            <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0,40) + "...")</a>
+                                                                            <div class="meta">
+                                                                                <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
+                                                                            </div>
+                                                                            <div class="description">
+                                                                                <p>
+                                                                                    <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="extra">
+                                                                                <div class="ui right floated">
+                                                                                    <a class="ui red tag label">HOT</a>
+                                                                                </div>
+                                                                                <div class="ui">
+                                                                                    2
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <center>
+                                                    <a href="#">Xem thêm việc làm liên quan</a>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Sửa thông tin-->
+<!-- Modal -->
+<div class="modal fade" id="editprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-warning" id="exampleModalLabel">Thay đổi thông tin</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="ui form" method="post" action="@Url.Action("EditProfile","User")">
+                <div class="modal-body">
+                    <div class="field">
+                        <label>Tên hiển thị</label>
+                        <input placeholder="Tên hiển thị" name="user_nicename" type="text" value="@Model.user_nicename">
+                    </div>
+                    <div class="field">
+                        <label>Chuyên nghành yêu thích</label>
+                        <input placeholder="Chuyên nghành" name="user_industryloving" type="text" value="@Model.user_industryloving">
+                    </div>
+                    <div class="field">
+                        <label>Kỹ năng yêu thích</label>
+                        <input placeholder="Kỹ năng yêu thích" name="user_skill" type="text" value="@Model.user_skill">
+                    </div>
+                    <div class="field">
+                        <label>Sở thích</label>
+                        <input placeholder="Sơ thích" name="user_interests" type="text" value="@Model.user_interests">
+                    </div>
+                    <div class="ui error message"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="ui red button" data-dismiss="modal"><i class="fa fa-times">&nbsp;</i>Thoát</div>
+                    <div class="ui primary submit button"><i class="fa fa-save">&nbsp;</i>Lưu thay đổi</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Đổi mật khẩu-->
+<div class="modal fade" id="editpass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-warning" id="exampleModalLabel">Đổi mật khẩu</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="ui form a" method="post" action="@Url.Action("ResetPass","User")"  onsubmit="return checkform()">
+                <div class="modal-body">
+                    <div class="field">
+                        <label>Mật khẩu cũ</label>
+                        <input placeholder="***********************" name="user_passol" id="user_passol" type="password">
+                    </div>
+                    <div class="field">
+                        <label>Mật khẩu mới</label>
+                        <input placeholder="***********************" name="user_passnew" id="user_passnew" type="password">
+                    </div>
+                    <div class="field">
+                        <label>Xác nhận mật khẩu</label>
+                        <input placeholder="***********************" name="user_respass" id="user_respass" type="password">
+                    </div>
+                    <div class="ui error message"></div>
+                    <div id="check" class="font-weight-bold" style="color: red"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="ui red button" data-dismiss="modal"><i class="fa fa-times">&nbsp;</i>Thoát</div>
+                    <div >
+                        <button type="submit" class="ui primary button"><i class="fa fa-save">&nbsp;</i>Lưu thay đổi</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function checkform() {
+        var user_passol = document.getElementById("user_passol").value;
+        var user_passnew = document.getElementById("user_passnew").value;
+        var user_respass = document.getElementById("user_respass").value;
+
+        if (user_passnew != user_respass) {
+            document.getElementById("check").innerText = "Xác nhận mật khẩu không chính xác";
+        }
+        else if (@Model.user_pass != user_passol)
+        {
+            document.getElementById("check").innerText = "Mật khẩu cũ không chính xác";
+        }
+        else {
+            return true;
+        }
+        return false;
+    }
+</script>
+<!--Sửa hình ảnh-->
+<div class="modal fade" id="editavatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-warning" id="exampleModalLabel">Cập nhật ảnh</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="ui form a" method="post" action="@Url.Action("ResetPass","User")" onsubmit="return checkform()">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="field">
+                                <label>Ảnh cá nhân</label>
+                                <input type="file" accept="image/*" onchange="preview_image(event)" />
+                                <img id="output_image" src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" style="width: 100%; height: 200px" />
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="field">
+                                <label>Ảnh bìa</label>
+                                <input type="file" accept="image/*" onchange="preview_imagebanner(event)" />
+                                <img id="output_imagebanner" src="~/Images/User/mau-background-don-gian-01-1024x640.jpg" style="width: 100%; height: 200px" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui error message"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="ui red button" data-dismiss="modal"><i class="fa fa-times">&nbsp;</i>Thoát</div>
+                    <div>
+                        <button type="submit" class="ui primary button"><i class="fa fa-save">&nbsp;</i>Lưu thay đổi</button>
+                    </div>
+                </div>
+            </form>
+            <script>
+                function preview_image(event) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var output = document.getElementById('output_image');
+                        output.src = reader.result;
+                    }
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+                function preview_imagebanner(event) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var output = document.getElementById('output_imagebanner');
+                        output.src = reader.result;
+                    }
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+            </script>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    $('.ui.form')
+        .form({
+            fields: {
+                user_nicename: {
+                    identifier: 'user_nicename',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Không bỏ trống tên hiển thị'
+                        }
+                    ]
+                },
+                user_skill: {
+                    identifier: 'user_skill',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Không bỏ trống kỹ năng'
+                        }
+                    ]
+                },
+                user_interests: {
+                    identifier: 'user_interests',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Không bỏ trống sở thích'
+                        }
+                    ]
+                },
+                user_industryloving: {
+                    identifier: 'user_industryloving',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Không bỏ trống chuyên nghành'
+                        }
+                    ]
+                }
+            }
+        })
+        ;
+</script>
+<script>
+    $('.ui.form.a')
+        .form({
+            fields: {
+                user_passol: {
+                    identifier: 'user_passol',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập mật khẩu cũ'
+                        }
+                    ]
+                },
+                user_passnew: {
+                    identifier: 'user_passnew',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng nhập mật khẩu mới'
+                        }
+                    ]
+                },
+                user_respass: {
+                    identifier: 'user_respass',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Vui lòng xác nhận mật khẩu'
+                        }
+                    ]
+                }
+            }
+        })
+        ;
+</script>

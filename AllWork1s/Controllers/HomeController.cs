@@ -32,5 +32,9 @@ namespace AllWork1s.Controllers
         {
             return PartialView();
         }
+        public PartialViewResult Ses()
+        {
+            return PartialView();
+        }
     }
 }
