@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="86c4f10f029b46738125f075e31badd4" Name="Diagram1">
-        <EntityTypeShape EntityType="DataWorkModel.Career" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.Cv" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.Employer" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.Form" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.Like" Width="1.5" PointX="10.5" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.Province" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.Submit" Width="1.5" PointX="7.5" PointY="21.875" IsExpanded="true" />
+      <Diagram DiagramId="a06de643acb64e48be7ea2dda40a6fae" Name="Diagram1">
+        <EntityTypeShape EntityType="DataWorkModel.Career" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.Cv" Width="1.5" PointX="5.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.Employer" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.Form" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.Like" Width="1.5" PointX="10.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.Province" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.Submit" Width="1.5" PointX="7.5" PointY="23.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWorkModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWorkModel.Theme" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.User" Width="1.5" PointX="3" PointY="31.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWorkModel.Work" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.User" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWorkModel.Work" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
         <AssociationConnector Association="DataWorkModel.FK_Cv_Career" ManuallyRouted="false" />
         <AssociationConnector Association="DataWorkModel.FK_Employer_Career" ManuallyRouted="false" />
         <AssociationConnector Association="DataWorkModel.FK_User_Career" ManuallyRouted="false" />
@@ -25,6 +25,7 @@
         <AssociationConnector Association="DataWorkModel.FK_Employer_Province" ManuallyRouted="false" />
         <AssociationConnector Association="DataWorkModel.FK_Work_Employer" ManuallyRouted="false" />
         <AssociationConnector Association="DataWorkModel.FK_Work_Form" ManuallyRouted="false" />
+        <AssociationConnector Association="DataWorkModel.FK_Work_Form1" ManuallyRouted="false" />
         <AssociationConnector Association="DataWorkModel.FK_Like_User" ManuallyRouted="false" />
         <AssociationConnector Association="DataWorkModel.FK_Like_Work" ManuallyRouted="false" />
         <AssociationConnector Association="DataWorkModel.FK_Work_Province" ManuallyRouted="false" />

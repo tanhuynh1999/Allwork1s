@@ -59,6 +59,11 @@ namespace AllWork1s.Models
         public Nullable<int> province_id { get; set; }
         public Nullable<int> career_id { get; set; }
         public Nullable<int> employer_limit { get; set; }
+        public string employer_emailcompany { get; set; }
+        public string employer_banner { get; set; }
+        public Nullable<int> employer_scale { get; set; }
+        public string employer_bonus { get; set; }
+        public Nullable<int> employer_foundedyear { get; set; }
     
         public virtual Career Career { get; set; }
         public virtual Province Province { get; set; }

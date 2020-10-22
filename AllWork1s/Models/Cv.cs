@@ -60,6 +60,10 @@ namespace AllWork1s.Models
         public Nullable<bool> cv_option { get; set; }
         public Nullable<System.DateTime> cv_datecreated { get; set; }
         public Nullable<int> career_id { get; set; }
+        public string cv_schoolname { get; set; }
+        public string cv_companyname { get; set; }
+        public string cv_companynametwo { get; set; }
+        public string cv_images { get; set; }
     
         public virtual Career Career { get; set; }
         public virtual User User { get; set; }

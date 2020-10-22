@@ -62,6 +62,7 @@ namespace AllWork1s.Models
         public virtual Career Career { get; set; }
         public virtual Employer Employer { get; set; }
         public virtual Form Form { get; set; }
+        public virtual Form Form1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Likes { get; set; }
         public virtual Province Province { get; set; }

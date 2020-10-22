@@ -18,6 +18,10 @@ namespace AllWork1s.Areas.EmployerUse.Controllers
             {
                 return RedirectToAction("Login","Employer");
             }
+            if (employer.employer_personalpage == false || employer.employer_personalpage == null)
+            {
+                return RedirectToAction("Createemployer", "Employer", new { id = employer.employer_id });
+            }
             return View();
         }
         public PartialViewResult Header()
@@ -34,6 +38,10 @@ namespace AllWork1s.Areas.EmployerUse.Controllers
             if (id != ses.employer_id)
             {
                 return RedirectToAction("Error");
+            }
+            if(ses.employer_personalpage == false || ses.employer_personalpage == null)
+            {
+                return RedirectToAction("Createemployer","Employer", new { id = ses.employer_id });
             }
             Employer employer = db.Employers.Find(id);
             return View(employer);

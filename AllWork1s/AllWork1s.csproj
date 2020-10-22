@@ -169,9 +169,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\EmployerUse\Controllers\CvEmployerController.cs" />
     <Compile Include="Areas\EmployerUse\Controllers\EmployerController.cs" />
     <Compile Include="Areas\EmployerUse\Controllers\HomeEmployerController.cs" />
     <Compile Include="Areas\EmployerUse\Controllers\ViewEmployerController.cs" />
+    <Compile Include="Areas\EmployerUse\Controllers\WorkEmployerController.cs" />
     <Compile Include="Areas\EmployerUse\EmployerUseAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Controllers\TestCode3\CvsController.cs" />
     <Compile Include="Controllers\TestCode3\EmployersController.cs" />
     <Compile Include="Controllers\TestCode3\UsersController.cs" />
+    <Compile Include="Controllers\TestCode3\WorksController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserCvController.cs" />
     <Compile Include="Controllers\ViewController.cs" />
@@ -2179,8 +2182,8 @@
     <Content Include="Images\Work\VietBeauty-Academy-cam-ket-tuyen-dung-viec-lam.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2198,13 +2201,6 @@
     <Content Include="Content\Layout\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\Layout\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\Layout\fonts\FontAwesome.otf" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\Semantic-UI-CSS-master\.versions" />
     <Content Include="Content\Semantic-UI-CSS-master\LICENSE" />
     <Content Include="Content\Semantic-UI-CSS-master\package.json" />
@@ -2300,6 +2296,16 @@
     <Content Include="Areas\EmployerUse\Views\ViewEmployer\Manager.cshtml" />
     <Content Include="Areas\EmployerUse\Views\ViewEmployer\Error.cshtml" />
     <Content Include="Areas\EmployerUse\Views\Employer\RegEmployer.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\Employer\Createemployer.cshtml" />
+    <Content Include="Areas\EmployerUse\Views\WorkEmployer\CreateWork.cshtml" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\EmployerUse\Views\CvEmployer\AllCv.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2343,11 +2349,6 @@
     <Content Include="Views\User\PersonalInformation.cshtml" />
     <Content Include="Views\View\DetailWork.cshtml" />
     <Content Include="Views\View\DetailEmployer.cshtml" />
-    <Content Include="Views\Employers\Create.cshtml" />
-    <Content Include="Views\Employers\Delete.cshtml" />
-    <Content Include="Views\Employers\Details.cshtml" />
-    <Content Include="Views\Employers\Edit.cshtml" />
-    <Content Include="Views\Employers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

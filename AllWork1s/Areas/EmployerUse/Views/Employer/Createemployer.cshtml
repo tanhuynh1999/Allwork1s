@@ -1,0 +1,199 @@
+﻿@model AllWork1s.Models.Employer
+@{
+    ViewBag.Title = "Createemployer";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+}
+@using (Html.BeginForm("Createemployer", "Employer", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.employer_id)
+
+    <div class="statistics" ng-app="">
+        <h4 class="text-primary"><b style="font-weight: bold">Thông tin cá nhân</b></h4>
+        <div class="row">
+            <div class="col-xl-12 pr-xl-2">
+                <div class="row">
+                    <div class="col-sm-12 pr-sm-2 statistics-grid">
+                        <div class="card card_border border-primary-top p-4">
+                            <div class="alert alert-danger">
+                                Để có thể sử dụng các tính năng của AllWork1s thì nhà tuyển dụng phải xây dựng thông tin công ty. Hệ thống sẽ hiển thị thông tin cá nhân này cho các ứng viên có thể nhìn thấy.
+                                <ul>
+                                    <li>Vui lòng nhập đầy đủ thông tin.</li>
+                                    <li>Bên trái: Nhập các trường thông tin theo quy định.</li>
+                                    <li>Bên phải: Nội dung ứng viên có thể nhìn thấy.</li>
+                                    <li>
+                                        <div>
+                                            @ViewBag.ThongBao
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card" style="padding: 10px">
+                                        <h5 class="text-danger font-weight-bold">Thông tin công ty</h5>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <b>Ảnh công ty</b>
+                                                <br />
+                                                <input name="imgLogo" type="file" accept="image/*" onchange="preview_imagelogo(event)" style="height: 200px; border: 1px solid black; width: 100%; border-radius: 7px 7px 7px 7px;background-image: url('../../../../Images/Employer/1024px-Oxygen15.04.1-insert-image.svg.png'); background-repeat: no-repeat; background-size: 100% 100%" />
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <b>Banner</b>
+                                                <br />
+                                                <input name="imgBanner" type="file" accept="image/*" onchange="preview_imagebanner(event)" style="height: 200px; border: 1px solid black; width: 100%; border-radius: 7px 7px 7px 7px; background-image: url('../../../../Images/Employer/1024px-Oxygen15.04.1-insert-image.svg.png'); background-repeat: no-repeat; background-size: 100% 100%" />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <b>Tên công ty</b>
+                                        <input type="text" name="employer_company" placeholder="Tên công ty" class="form-control" ng-model="employer_company" />
+                                        <b class="mt-2">Email công ty</b>
+                                        <input type="email" name="employer_emailcompany" placeholder="Email công ty" class="form-control" ng-model="employer_emailcompany" />
+                                        <b class="mt-2">Số điện thoại</b>
+                                        <input type="text" name="employer_phone" placeholder="Số điện thoại" class="form-control" ng-model="employer_phone" />
+                                        <h5 class="text-danger font-weight-bold mt-3">Nghành nghề / Tỉnh thành</h5>
+                                        <hr />
+                                        <b class="mt-2">Nghành nghề</b>
+                                        @Html.DropDownList("career_id", null, htmlAttributes: new { @class = "form-control" })
+                                        <b class="mt-2">Tỉnh thành</b>
+                                        @Html.DropDownList("province_id", null, htmlAttributes: new { @class = "form-control" })
+                                        <h5 class="text-danger font-weight-bold mt-3">Tâm điểm chính</h5>
+                                        <hr />
+                                        <b class="mt-2">Qui mô công ty (Số lượng nhân viên)</b>
+                                        <input type="number" name="employer_scale" placeholder="Qui mô công ty" class="form-control" ng-model="employer_scale" />
+                                        <b class="mt-2">Mức lương thưởng</b>
+                                        <input type="text" name="employer_bonus" placeholder="20.000.000 triệu" class="form-control" value="20.000.000 triệu" ng-model="employer_bonus" />
+                                        <b class="mt-2">Năm thành lập</b>
+                                        <input type="number" name="employer_foundedyear" placeholder="Năm thành lập" class="form-control" value="" ng-model="employer_year" />
+                                        <h5 class="text-danger font-weight-bold mt-3">Giới thiệu</h5>
+                                        <hr />
+                                        <b class="mt-2">Giới thiệu về công ty</b>
+                                        <textarea name="employer_introduce" class="form-control editor" style="height: 200px" ng-model="employer_introduce" placeholder="Nêu nội dung giới thiệu về công ty"></textarea>
+                                        <b class="mt-2">Tại sao bạn yêu thích công ty</b>
+                                        <textarea name="employer_favourite" class="form-control" style="height: 200px" ng-model="employer_favourite" placeholder="Nêu mức lương, thưởng, lợi ích mà ứng viên có thể thích"></textarea>
+                                        <h5 class="text-danger font-weight-bold mt-3">Địa chỉ</h5>
+                                        <hr />
+                                        <b class="mt-2">Địa chỉ chính (Có thể ghi đè nhiều địa chỉ)</b>
+                                        <textarea name="employer_addressmain" class="form-control" style="height: 200px" ng-model="employer_address" placeholder="Địa chỉ"></textarea>
+                                        <b class="mt-2">Ifame map (Code bản đồ map)</b>
+                                        <textarea name="employer_ifamemapmain" class="form-control" style="height: 200px" ng-model="employer_ifame" placeholder="Ifame google map"></textarea>
+                                        <br />
+                                        <button type="submit" class="btn btn-primary w-100">Thiết lập</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <img id="output_imagebanner" src="~/Images/Employer/inner_page_bnr.jpg" style="width: 100%; height: 300px" />
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <center style="margin-top: -10%">
+                                                    <img id="output_imagelogo" src="~/Images/User/822711_user_512x512.png" style="width: 200px; height: 200px; border-radius: 50%" />
+                                                    <h2 ng-bind="employer_company" class="font-weight-bold mt-2" style="color: red"></h2>
+                                                    <p>
+                                                        <b class="fas fa-mail-bulk">&nbsp;</b><span ng-bind="employer_emailcompany"></span>|<i class="fas fa-phone">&nbsp;</i><span ng-bind="employer_phone"></span>
+                                                    </p>
+                                                </center>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="padding: 5px">
+                                            <div class="col-lg-3">
+                                                <div class="card" style="padding: 10px">
+                                                    <center>
+                                                        <i class="fas fa-users" style="font-size: 30px"></i><br />
+                                                        <div>Qui mô nhân viên</div>
+                                                        <b ng-bind="employer_scale" style="color: crimson"></b>+
+                                                    </center>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="card" style="padding: 10px">
+                                                    <center>
+                                                        <i class="fas fa-briefcase" style="font-size: 30px"></i><br />
+                                                        <div>Tổng công việc</div>
+                                                        <b style="color: crimson">0</b>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="card" style="padding: 10px">
+                                                    <center>
+                                                        <i class="fas fa-dollar" style="font-size: 30px"></i><br />
+                                                        <div>Mức lương thưởng</div>
+                                                        Lên đến: <b ng-bind="employer_bonus" style="color: crimson"></b>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="card" style="padding: 10px">
+                                                    <center>
+                                                        <i class="fas fa-calendar" style="font-size: 30px"></i><br />
+                                                        <div>Năm thành lập</div>
+                                                        - <b ng-bind="employer_year" style="color: crimson"></b>-
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" style="padding: 10px">
+                                            <div class="col-lg-12">
+                                                <h4 class="font-weight-bold">Giới thiệu</h4>
+                                                <p ng-bind="employer_introduce">
+
+                                                </p>
+                                                <h4 class="font-weight-bold">Tại sao bạn yêu thích công ty</h4>
+                                                <p ng-bind="employer_favourite">
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3" style="padding: 10px">
+                                            <div class="col-lg-12">
+                                                <hr />
+                                                <h4 class="font-weight-bold">Địa chỉ</h4>
+                                                <p ng-bind="employer_address">
+
+                                                </p>
+                                                <h4 class="font-weight-bold">Map</h4>
+                                                <p ng-bind="employer_ifame">
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function preview_imagelogo(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output_imagelogo');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    function preview_imagebanner(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output_imagebanner');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>

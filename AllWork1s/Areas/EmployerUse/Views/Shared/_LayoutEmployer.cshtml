@@ -1,4 +1,12 @@
-﻿<!--
+﻿@using AllWork1s.Models;
+@{ 
+    Employer employer = (Employer)Session["employer"];
+    if (Session["employer"] == null)
+    {
+        Response.Redirect("/View/AllWork");
+    }
+}
+<!--
 Author: W3layouts
 Author URL: http://w3layouts.com
 -->
@@ -17,6 +25,7 @@ Author URL: http://w3layouts.com
     <link href="~/Content/fontawesome-free-5.14.0-web/css/all.min.css" rel="stylesheet" />
     <!-- google fonts -->
     <link href="//fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <script src="~/Scripts/angular.min.js"></script>
 </head>
 
 <body class="sidebar-menu-collapsed">

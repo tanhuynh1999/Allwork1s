@@ -18,6 +18,7 @@ namespace AllWork1s.Models
         public Form()
         {
             this.Works = new HashSet<Work>();
+            this.Works1 = new HashSet<Work>();
         }
     
         public int form_id { get; set; }
@@ -25,5 +26,7 @@ namespace AllWork1s.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Work> Works { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Work> Works1 { get; set; }
     }
 }

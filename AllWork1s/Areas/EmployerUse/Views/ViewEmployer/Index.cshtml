@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-lg-12 mt-5">
                                 <center>
-                                    <button class="btn btn-danger" style="font-size: 25px"><i class="fas fa-search">&nbsp;</i>Tìm ứng viên ngay</button>
+                                    <button class="btn btn-danger" style="font-size: 25px" onclick="window.location.href = '@Url.Action("AllCv","CvEmployer")'"><i class="fas fa-search">&nbsp;</i>Tìm ứng viên ngay</button>
                                 </center>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             <div class="col-lg-12 mt-2">
                                 <center>
                                     <b>Bạn còn <span style="color: red">@(employer.employer_limit - countworkid.Count)</span> bài tuyển nữa. Đăng bài tuyển, tuyển ứng viên.</b><br />
-                                    <button class="btn btn-danger mt-2" style="font-size: 25px">Đăng bài tuyển</button>
+                                    <button class="btn btn-danger mt-2" style="font-size: 25px" onclick="window.location.href = '@Url.Action("CreateWork","WorkEmployer", new { id =  employer.employer_id})'">Đăng bài tuyển</button>
                                 </center>
                             </div>
                         </div>

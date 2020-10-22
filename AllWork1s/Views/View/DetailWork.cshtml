@@ -76,6 +76,46 @@
                                                             <h3>
                                                                 @Model.work_pricemin - @Model.work_pricemax @Model.work_symbol
                                                             </h3>
+                                                            @if (Model.work_image != null && Model.work_imagetwo != null && Model.work_imgathree != null)
+                                                            {
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <img src="~/Images/Employer/20170701_7-câu-hỏi-nhà-tuyển-dụng-muốn-nghe-sau-phỏng-vấn.png" style="width: 100%; height: 130px" />
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <img src="~/Images/Employer/20170701_7-câu-hỏi-nhà-tuyển-dụng-muốn-nghe-sau-phỏng-vấn.png" style="width: 100%; height: 130px" />
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <img src="~/Images/Employer/20170701_7-câu-hỏi-nhà-tuyển-dụng-muốn-nghe-sau-phỏng-vấn.png" style="width: 100%; height: 130px" />
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            else if (Model.work_image != null && Model.work_imagetwo != null)
+                                                            {
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <img src="~/Images/Employer/@Model.work_image" style="width: 100%; height: 130px" />
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <img src="~/Images/Employer/@Model.work_imagetwo" style="width: 100%; height: 130px" />
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            else if(Model.work_image != null && Model.work_imgathree != null)
+                                                            {
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <img src="~/Images/Employer/@Model.work_image" style="width: 100%; height: 130px" />
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <img src="~/Images/Employer/@Model.work_imgathree" style="width: 100%; height: 130px" />
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+
+                                                            }
                                                             <h3>Mô tả công viêc:</h3>
                                                             <br />
                                                             @Html.Raw(Model.work_description)
@@ -107,7 +147,7 @@
                                                             <div class="ui red button w-100" style="font-size: 17px">NỘP ĐƠN BẰNG CV</div>
                                                             <h4 class="text-center">hoặc</h4>
                                                             <div class="ui green button w-100" style="font-size: 17px">NỘP ĐƠN KHÔNG CV</div>
-                                                            <h4 class="text-center"><b class="text-warning">Hạn nộp: </b> @Model.work_datesend.Value.Day - @Model.work_datesend.Value.Month - @Model.work_datesend.Value.Year</h4>
+                                                            <h4 class="text-center"><b class="text-warning">Hạn nộp: </b> @Model.work_deadline.Value.Day - @Model.work_deadline.Value.Month - @Model.work_deadline.Value.Year</h4>
                                                             <br />
                                                             <ul>
                                                                 <li><b>Vị trí: </b><br /> @Model.Province.province_name</li>

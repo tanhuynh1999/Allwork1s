@@ -121,7 +121,14 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu3" aria-haspopup="true"
                                aria-expanded="false">
                                 <div class="profile_img">
-                                    <img src="~/Images/Employer/@employer.employer_logo" class="rounded-circle" alt="" />
+                                    @if (employer.employer_logo != null)
+                                    {
+                                        <img src="~/Images/Employer/@employer.employer_logo" class="rounded-circle" alt="" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/User/822711_user_512x512.png" class="rounded-circle" alt="" />
+                                    }
                                     <div class="user-active">
                                         <span></span>
                                     </div>

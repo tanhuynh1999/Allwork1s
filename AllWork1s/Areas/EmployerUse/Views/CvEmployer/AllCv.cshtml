@@ -1,0 +1,68 @@
+﻿@using AllWork1s.Models;
+@model List<Cv>
+@{
+    ViewBag.Title = "AllCv";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+}
+
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <!-- breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Elements</a></li>
+                <li class="breadcrumb-item active" aria-current="page">People Cards</li>
+            </ol>
+        </nav>
+        <!-- //breadcrumbs -->
+        <!-- people -->
+        <section class="people">
+            <section class="w3l-team-block">
+                <!-- //people cards style 1 -->
+                <div class="card card_border mb-5">
+                    <div class="cards__heading">
+                        <h3>People Cards -<span> Version 1</span></h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="teams mb-4">
+                            <div class="row px-2">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-lg-3 col-md-6 mb-lg-0 mb-4 px-2">
+                                        <div class="item">
+                                            <div class="d-team-grid team-info">
+                                                <div class="column">
+                                                    <a href="team-single.html"><img src="~/Images/User/@item.cv_images" alt="" class="w-100" style="height: 250px"/></a>
+                                                </div>
+                                                <div class="team-member">
+                                                    <h3 class=""><a href="team-single.html">@item.cv_fullname</a></h3>
+                                                    <p>
+                                                        <b>Vị trí mong muốn:</b> @item.cv_location<br />
+                                                        <b>Tỉnh thành:</b> Bình Dương<br />
+                                                        <b>Tốt nghiệp:</b> @item.cv_schools<br />
+                                                        <b>Nghành chính:</b> @item.Career.career_name<br />
+                                                    </p>
+                                                    <div class="text-lg-right mt-5">
+                                                        <a href="#">Xem hồ sơ</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!-- //people -->
+
+    </div>
+    <!-- //content -->
+</div>
+
