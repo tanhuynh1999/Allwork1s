@@ -2,15 +2,20 @@
 @model Work
 @{
     User user = (User)Session["user"];
-    ViewBag.Title = "DetailWork";
+    ViewBag.Title = Model.work_name;
     Layout = "~/Views/Shared/_Layout.cshtml";
     DataWorkEntities db = new DataWorkEntities();
+    String radio = "customRadio";
+    int number = 1;
+    int i = 1;
+    String id_num = "hscv";
 }
-@{ 
-    List<Work> works = db.Works.Where(n=>n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.career_id == Model.career_id && n.work_id != Model.work_id).OrderByDescending(n=>n.work_datecreated).Take(5).ToList();
-    List<Work> worksall = db.Works.Where(n=>n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.employer_id == Model.employer_id && n.work_id != Model.work_id).OrderByDescending(n=>n.work_datecreated).Take(5).ToList();
+@{
+    List<Work> works = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.career_id == Model.career_id && n.work_id != Model.work_id).OrderByDescending(n => n.work_datecreated).Take(5).ToList();
+    List<Work> worksall = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.employer_id == Model.employer_id && n.work_id != Model.work_id).OrderByDescending(n => n.work_datecreated).Take(5).ToList();
+
+    List<Favourite> favourites = db.Favourites.ToList();
 }
-@Html.Action("Css","Home")
 <section class="w3l-specification-6">
     <div class="specification-layout">
         <div class="container" style="max-width: 1500px">
@@ -29,13 +34,57 @@
                                 </p>
                             </div>
                             <div class="col-lg-2">
-                                <button class="ui default button w-100"><i class="fa fa-heart">&nbsp;</i>Lưu việc làm này</button>
+                                @if (user != null)
+                                {
+
+                                    if (ViewBag.Fa == 0)
+                                    {
+                                        <button class="ui default button w-100" data-toggle="modal" data-target="#fa"><i class="fa fa-heart">&nbsp;</i>Lưu việc làm này</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="fa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Lưu việc làm</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Việc làm được lưu tại trang quản lý <b>lưu việc làm</b>. Sau khi lưu, bạn có thể xem lại công việc này ở trang quản lý của mình.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                        <form role="form" action="@Url.Action("FavouriteWork","User")" method="post">
+                                                            @Html.AntiForgeryToken()
+                                                            <input type="hidden" name="user_id" value="@user.user_id" />
+                                                            <input type="hidden" name="work_id" value="@Model.work_id" />
+                                                            <button type="submit" class="btn btn-primary">Lưu việc làm</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in favourites.Where(n => n.work_id == Model.work_id && n.user_id == user.user_id))
+                                        {
+                                            <button onclick="window.location.href='@Url.Action("CancelFavouriteDetailWork","User",new { id = item.favourite_id  })'" class="ui red button w-100"><i class="fa fa-heart">&nbsp;</i>Hủy yêu thích</button>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <button class="ui default button w-100"><i class="fa fa-heart">&nbsp;</i>Lưu việc làm này</button>
+
+                                }
                                 <button class="ui blue basic button mt-2 w-100"><i class="fa fa-share">&nbsp;</i>Chia sẻ</button>
                             </div>
                         </div>
                     </div>
                     <style>
-                        .menuca ul li{
+                        .menuca ul li {
                             float: left;
                             margin-left: 20px;
                         }
@@ -45,13 +94,13 @@
                             <div class="nav-wrapper">
                                 <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                                     <li class="nav-item">
-                                        <a  style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fas fa-info">&nbsp;</i>Thông tin việc làm</a>
+                                        <a style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="fas fa-info">&nbsp;</i>Thông tin việc làm</a>
                                     </li>
                                     <li class="nav-item">
                                         <a style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="fas fa-briefcase">&nbsp;</i>Việc làm cùng công ty @(worksall.Count == 0 ? "" : " ("+worksall.Count+")")</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" href="https://getbootstrap.com/docs/4.5/utilities/borders/"><i class="fas fa-building">&nbsp;</i>Thông tin công ty</a>
+                                        <a style="font-size: 15px" class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" href="@Url.Action("DetailEmployer","View", new { id = Model.employer_id })"><i class="fas fa-building">&nbsp;</i>Thông tin công ty</a>
                                     </li>
                                 </ul>
                             </div>
@@ -101,7 +150,7 @@
                                                                     </div>
                                                                 </div>
                                                             }
-                                                            else if(Model.work_image != null && Model.work_imgathree != null)
+                                                            else if (Model.work_image != null && Model.work_imgathree != null)
                                                             {
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
@@ -129,7 +178,28 @@
                                                             <br />
                                                             <p>Ứng viên nộp hồ sơ trực tuyến bằng cách bấm <b class="text-danger">Ứng tuyển bằng CV</b> hoặc <b class="text-danger">Ứng tuyển không CV</b> dưới đây.</p>
                                                             <center>
-                                                                <div class="ui red button" style="font-size: 17px">NỘP ĐƠN BẰNG CV</div>
+                                                                @if (user != null)
+                                                                {
+                                                                    {
+                                                                        List<Submit> submits = db.Submits.Where(n => n.user_id == user.user_id && n.work_id == Model.work_id).ToList();
+                                                                        ViewBag.submits = submits.Count;
+                                                                    }
+                                                                    if (ViewBag.submits == 0)
+                                                                    {
+
+                                                                        <div class="ui red button" style="font-size: 17px" data-toggle="modal" data-target="#submitcv">NỘP ĐƠN BẰNG CV</div>
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        <div class="ui red button" style="font-size: 17px">HỦY NỘP ĐƠN</div>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+
+                                                                    <div class="ui red button" style="font-size: 17px">NỘP ĐƠN BẰNG CV</div>
+                                                                }
                                                                 <div class="ui green button" style="font-size: 17px">NỘP ĐƠN KHÔNG CV</div>
                                                                 <br />
                                                                 <br />
@@ -144,7 +214,28 @@
                                                         </style>
                                                         <div class="col-lg-3 caexp">
                                                             <br />
-                                                            <div class="ui red button w-100" style="font-size: 17px">NỘP ĐƠN BẰNG CV</div>
+                                                            @if (user != null)
+                                                            {
+                                                                {
+                                                                    List<Submit> submits = db.Submits.Where(n => n.user_id == user.user_id && n.work_id == Model.work_id).ToList();
+                                                                    ViewBag.submits = submits.Count;
+                                                                }
+                                                                if (ViewBag.submits == 0)
+                                                                {
+
+                                                                    <div class="ui red button w-100" style="font-size: 17px" data-toggle="modal" data-target="#submitcv">NỘP ĐƠN BẰNG CV</div>
+                                                                }
+                                                                else
+                                                                {
+
+                                                                    <div class="ui red button w-100" style="font-size: 17px">NỦY NỘP ĐƠN</div>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+
+                                                                <div class="ui red button w-100" style="font-size: 17px">NỘP ĐƠN BẰNG CV</div>
+                                                            }
                                                             <h4 class="text-center">hoặc</h4>
                                                             <div class="ui green button w-100" style="font-size: 17px">NỘP ĐƠN KHÔNG CV</div>
                                                             <h4 class="text-center"><b class="text-warning">Hạn nộp: </b> @Model.work_deadline.Value.Day - @Model.work_deadline.Value.Month - @Model.work_deadline.Value.Year</h4>
@@ -281,13 +372,13 @@
                                 <br />
                                 <br />
                                 <div class="row">
-                                    @foreach(var item in works)
+                                    @foreach (var item in works)
                                     {
                                         <div class="col-lg-12 border-bottom">
                                             <br />
                                             <div class="row">
                                                 <div class="col-lg-4" style="padding: 0px">
-                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" class="w-100" style="height: 50px"/>
+                                                    <img src="~/Images/Employer/@item.Employer.employer_logo" class="w-100" style="height: 50px" />
                                                 </div>
                                                 <div class="col-lg-8" style="padding: 0px">
                                                     <a href="@Url.Action("DetailWork","View",new { id = item.work_id })">
@@ -308,4 +399,147 @@
         </div>
     </div>
 </section>
+@if (user != null)
+{
 
+    {
+        List<Submit> submits = db.Submits.Where(n => n.user_id == user.user_id && n.work_id == Model.work_id).ToList();
+        ViewBag.submits = submits.Count;
+    }
+    if (ViewBag.submits != 0)
+    {
+        <div class="modal fade" id="note" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="max-width: 700px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thông báo từ công ty @Model.Employer.employer_company</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-danger">Bạn đã nộp hồ sơ thành công cho công ty @Model.Employer.employer_company!</div>
+                        @{
+                            List<Submit> submits = db.Submits.Where(n => n.user_id == user.user_id && n.work_id == Model.work_id).ToList();
+
+                        }
+                        @foreach (var item in submits)
+                        {
+                            <ul>
+                                <li><b>Mẫu hồ sơ đã nộp:</b> #@id_num@item.cv_id <a href="#">Xem hồ sơ</a></li>
+                                <li><b>Ngày nộp:</b> @item.submit_datecreated</li>
+                                <li><b>Tình trạng:</b> Chưa phản hồi</li>
+                                <hr />
+                                <li>
+                                    <div class="col-lg-12 mt-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-5">
+                                                <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" class="card-img" alt="..." style="height: 100%">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@item.Cv.cv_fullname</h5>
+                                                    <p class="card-text">
+                                                        <ul>
+                                                            <li><i class="fa fa-mail-bulk">&nbsp;</i>@item.Cv.cv_email</li>
+                                                            <li><i class="fas fa-university">&nbsp;</i>@item.Cv.cv_schools</li>
+                                                            <li><i class="fab fa-accusoft"></i>@item.Cv.cv_location</li>
+                                                            <li><i class="fa fa-calendar">&nbsp;</i>@item.Cv.cv_datecreated</li>
+                                                            <li><button type="button" class="btn btn-sm btn-primary btn-tooltip" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-container="body" data-animation="true">Sửa hồ sơ @id_num@item.cv_id</button></li>
+                                                        </ul>
+                                                    </p>
+                                                    <p class="card-text"><small class="text-muted">Mã hồ sơ: #@id_num@item.cv_id</small></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <br />
+                                <li><button type="button" class="btn btn-sm btn-danger btn-tooltip w-100" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-container="body" data-animation="true" onclick="window.location.href='@Url.Action("WorkSubmit","User", new { id = item.user_id })'">Quản lý nộp hồ sơ</button></li>
+                            </ul>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="modal fade" id="submitcv" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document" style="max-width: 1200px;z-index: 1900000000 !important">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="card bg-secondary shadow border-0 mb-0">
+                            <form action="@Url.Action("SubmitCV","User")" method="post">
+                                <div class="card-header bg-white">
+                                    @if (user != null)
+                                    {
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <h2 class="text-center">Chọn hồ sơ nộp</h2>
+                                                <input type="hidden" value="@Model.work_id" name="work_id" />
+                                                <hr />
+                                                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #fc7c5f">
+                                                    <span class="alert-inner--icon"><i class="ni ni-bell-55"></i></span>
+                                                    <span class="alert-inner--text"><strong>Chào @user.user_nicename!</strong> Chọn hồ sơ để nộp cho nhà tuyển dụng @Model.Employer.employer_company!</span>
+                                                </div>
+                                            </div>
+                                            @foreach (var item in db.Cvs.Where(n => n.cv_activate == true && n.cv_option == true && n.user_id == user.user_id).OrderByDescending(n => n.cv_datecreated).ToList())
+                                            {
+                                                <div class="col-lg-6 mt-3">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-md-5">
+                                                            <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" class="card-img" alt="..." style="height: 100%">
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">@item.cv_fullname</h5>
+                                                                <p class="card-text">
+                                                                    <ul>
+                                                                        <li><i class="fa fa-mail-bulk">&nbsp;</i>@item.cv_email</li>
+                                                                        <li><i class="fas fa-university">&nbsp;</i>@item.cv_schools</li>
+                                                                        <li><i class="fab fa-accusoft"></i>@item.cv_location</li>
+                                                                        <li><i class="fa fa-calendar">&nbsp;</i>@item.cv_datecreated</li>
+                                                                        <li><button type="button" class="btn btn-sm btn-primary btn-tooltip" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-container="body" data-animation="true">Sửa hồ sơ @id_num@item.cv_id</button></li>
+                                                                    </ul>
+                                                                </p>
+                                                                <p class="card-text"><small class="text-muted">Mã hồ sơ: #@id_num@item.cv_id</small></p>
+                                                                <div class="custom-control custom-radio">
+                                                                    <input name="cv_id" class="custom-control-input" id="@radio@i" type="radio" value="@item.cv_id">
+                                                                    <label class="custom-control-label" for="@radio@i">
+                                                                        <span>#@id_num@item.cv_id</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                i++;
+                                            }
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Nộp hồ sơ</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                        </div>
+                                    }
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+
+}
+<script>
+    $(document).ready(function () {
+        $('#note').modal('show');
+    })
+</script>

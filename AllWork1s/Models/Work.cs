@@ -19,6 +19,7 @@ namespace AllWork1s.Models
         {
             this.Likes = new HashSet<Like>();
             this.Submits = new HashSet<Submit>();
+            this.Favourites = new HashSet<Favourite>();
         }
     
         public int work_id { get; set; }
@@ -58,6 +59,7 @@ namespace AllWork1s.Models
         public Nullable<int> form_id { get; set; }
         public Nullable<int> career_id { get; set; }
         public Nullable<bool> work_del { get; set; }
+        public Nullable<System.DateTime> work_dateupdate { get; set; }
     
         public virtual Career Career { get; set; }
         public virtual Employer Employer { get; set; }
@@ -68,5 +70,7 @@ namespace AllWork1s.Models
         public virtual Province Province { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Submit> Submits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Favourite> Favourites { get; set; }
     }
 }

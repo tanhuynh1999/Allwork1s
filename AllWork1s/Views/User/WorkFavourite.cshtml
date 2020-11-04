@@ -1,0 +1,89 @@
+﻿@using AllWork1s.Models;
+@model List<Favourite>
+@{
+    ViewBag.Title = "Danh sách việc làm đã nộp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DataWorkEntities db = new DataWorkEntities();
+}
+@Html.Action("Css", "Home")
+<link href="~/Content/UI/Img/pe-icon-7-stroke.css" rel="stylesheet" />
+<link href="~/Content/UI/Img/rotating-card.css" rel="stylesheet" />
+<div class="w3l-hero-headers-9">
+    <section>
+        <div class="container" style="max-width: 1280px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 style="color: #7B55FF; font-size: 40px" class="text-center mt-5">Bạn đã yêu thích @Model.Count công việc</h1>
+                    <p class="text-center">
+                        Công việc bạn đã yêu thích sẽ lưu tại đây.
+                    </p>
+                    <p>
+                        <center><button class="ui red button" onclick="window.location.href='@Url.Action("ViewCV","UserCv")'"><i class="fa fa-address-book">&nbsp;</i>Tạo thêm hồ sơ</button></center>
+                    </p>
+                </div>
+                <div class="col-lg-8 ca">
+                    <div class="row mt-5">
+                        <div class="col-lg-12">
+                            <div class="card" style="border-radius: 0px 0px 0px 0px">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input type="text" class="form-control w-100" placeholder="Nhập mã hồ sơ, tên công ty, tên việc làm" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <div class="card" style="border-radius: 0px 0px 0px 0px">
+                                <table class="table table-hover">
+                                    <thead class="bg-primary text-white font-weight-bold">
+                                        <tr>
+                                            <td>Mã</td>
+                                            <td>Logo công ty</td>
+                                            <td>Tên việc làm</td>
+                                            <td>Lương</td>
+                                            <td>Thời gian yêu thích</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Count == 0)
+                                        {
+                                            <tr>
+                                                <td>Trống</td>
+                                                <td>Trống</td>
+                                                <td>Trống</td>
+                                                <td>Trống</td>
+                                                <td>Trống</td>
+                                                <td>Trống</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.favourite_id</td>
+                                                    <td><img src="~/Images/Employer/@item.Work.Employer.employer_logo" style="width: 50px; height: 50px" /></td>
+                                                    <td>@item.Work.work_name</td>
+                                                    <td>@item.Work.work_pricemin - @item.Work.work_pricemax @item.Work.work_symbol</td>
+                                                    <td>@item.favourite_datecreate</td>
+                                                    <td>
+                                                        <a href="@Url.Action("DetailWork","View", new { id = item.work_id })"><i class="fa fa-eye"></i></a>
+                                                        <a href="@Url.Action("CancelFavourite", "User", new { id = item.favourite_id })"><i class="fa fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    @Html.Action("Manager", "View")
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

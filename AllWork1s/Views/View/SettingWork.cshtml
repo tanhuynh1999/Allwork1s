@@ -1,0 +1,63 @@
+﻿@using AllWork1s.Models;
+@{
+    ViewBag.Title = "Cài đặt tìm việc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DataWorkEntities db = new DataWorkEntities();
+    User user = (User)Session["user"];
+}
+@Html.Action("Css", "Home")
+<link href="~/Content/UI/Img/pe-icon-7-stroke.css" rel="stylesheet" />
+<link href="~/Content/UI/Img/rotating-card.css" rel="stylesheet" />
+<div class="w3l-hero-headers-9">
+    <section>
+        <div class="container" style="max-width: 1280px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 style="color: #7B55FF; font-size: 40px" class="text-center mt-5">CÀI ĐẶT TÌM VIỆC</h1>
+                    <p class="text-center">
+                        
+                    </p>
+                    <p>
+                        <center><button class="ui red button" onclick="window.location.href='@Url.Action("ViewCV","UserCv")'"><i class="fa fa-address-book">&nbsp;</i>Tạo thêm hồ sơ</button></center>
+                    </p>
+                </div>
+                <div class="col-lg-8 ca">
+                    <div class="row mt-5">
+                        <div class="col-lg-12">
+                            <div class="card" style="border-radius: 0px 0px 0px 0px">
+                                <div style="padding: 15px">
+                                    <form action="@Url.Action("EditCareerView","Setting")" method="post">
+                                        <b>Nghành nghề ưu tiên</b><br />
+                                        @Html.DropDownList("career_id", null, htmlAttributes: new { @class = "form-control" })
+                                        <p class="text-danger mt-1">Sau khi cài đặt đúng nghành nghề, hệ thống sẽ hiển thị tất cả công việc liên quan đến nghành nghề của bạn ở tất cả trang đề xuất.</p>
+                                        <b class="mt-2">Mức độ xuất hiện</b><br />
+                                        <select class="form-control mt-1">
+                                            <option>Mặc định</option>
+                                        </select>
+                                        <center class="mt-5">
+                                            <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                                        </center>
+                                    </form>
+                                    <hr />
+                                    <b class="text-warning">Các chức năng đang phát triển</b><br />
+                                    <b class="mt-2">Cài đặt từ khóa</b><br />
+                                    <b class="mt-2">Cài đặt nhà tuyển dụng</b><br />
+                                    <b class="mt-2">Cài đặt tìm việc gấp</b><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    @Html.Action("Manager", "View")
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+        ;
+</script>

@@ -22,11 +22,11 @@ namespace AllWork1s.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Contact(int ?id)
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
+            Employer employer = db.Employers.Find(id);
+            return View(employer);
         }
         public PartialViewResult Css()
         {

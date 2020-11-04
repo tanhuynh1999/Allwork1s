@@ -26,7 +26,7 @@
     }
     .ui.form input:not([type]), .ui.form input[type=date], .ui.form input[type=datetime-local], .ui.form input[type=email], .ui.form input[type=file], .ui.form input[type=number], .ui.form input[type=password], .ui.form input[type=search], .ui.form input[type=tel], .ui.form input[type=text], .ui.form input[type=time], .ui.form input[type=url] {
         padding: 0px;
-        line-height: 0px;
+        line-height: -1px;
         border: 0px solid black;
     }
     .ui.form .field {
@@ -39,6 +39,9 @@
     .hoverinputem {
         border: 1px dashed red !important;
         width: 100%;
+    }
+    .ui.card, .ui.cards > .card {
+        width: 100% !important;
     }
 </style>
 <form class="ui form" method="post" style="font-size: 15px;">

@@ -1,0 +1,458 @@
+﻿@using AllWork1s.Models;
+@model List<Submit>
+@{
+    ViewBag.Title = "Hồ sơ nhận";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/Semantic-UI-CSS-master/semantic.min.css" rel="stylesheet" />
+<script src="~/Content/Semantic-UI-CSS-master/semantic.min.js"></script>
+<link href="~/Content/card.css" rel="stylesheet" />
+<div class="statistics">
+    <div class="row">
+        <div class="col-xl-12 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-12 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <div class="row" style="padding: 20px">
+                            <div class="col-lg-6">
+                                <div class="ui search">
+                                    <div class="ui icon input" style="width: 100%">
+                                        <input class="prompt" type="text" placeholder="Tên công việc, mã công việc...">
+                                        <i class="search icon"></i>
+                                    </div>
+                                    <div class="results"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Tất cả</span>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Tất cả giới tính</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Lương</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Hình thức</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Sắp xếp mới nhất</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Tình trạng</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Thùng rác</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('.ui.dropdown')
+                .dropdown()
+                ;
+        </script>
+        <div class="col-xl-12 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-12 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <table class="table">
+                            <thead class="bg-primary text-white font-weight-bold">
+                                <tr>
+                                    <td>Bạn có @Model.Count hồ sơ nhận từ ứng viên</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <b>@item.Cv.cv_fullname "</b> đã nộp hồ sơ vào công việc <b class="text-info">"@item.Work.work_name"</b>" vào ngày <b>@item.submit_datecreated.Value.Day/@item.submit_datecreated.Value.Month/@item.submit_datecreated.Value.Year lúc @item.submit_datecreated.Value.Hour giờ @item.submit_datecreated.Value.Minute phút</b>
+                                            <div class="row mt-3">
+                                                <div class="col-lg-6">
+                                                    <div class="card blog-horizontal">
+                                                        <div class="card-body">
+                                                            <div class="card-img-actions mr-sm-3 mb-3">
+                                                                <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <h5 class="d-flex font-weight-semibold flex-nowrap my-1"> <a href="#" class="text-default mr-2" data-abc="true">@item.Cv.cv_fullname</a> <span class="text-danger-400 ml-auto text-warning font-weight-bold">@(item.Work.Employer.employer_version == 1 ? "" : "HOT")</span> </h5>
+                                                                <ul class="list-inline list-inline-dotted text-muted mb-0">
+                                                                    <li class="list-inline-item">Cập nhật: </li>
+                                                                    <li class="list-inline-item"> @item.Cv.cv_dateupdate.Value.Day/@item.Cv.cv_dateupdate.Value.Month/@item.Cv.cv_dateupdate.Value.Year lúc @item.Cv.cv_dateupdate.Value.Hour giờ @item.Cv.cv_dateupdate.Value.Minute</li>
+                                                                </ul>
+                                                            </div>
+                                                            <style>
+                                                                ul li {
+                                                                    list-style-type: none;
+                                                                }
+                                                            </style>
+                                                            <p>
+                                                                <ul>
+                                                                    <li>
+                                                                        <b>Giới tính: </b>
+                                                                        @if(item.Cv.cv_sex == 1)
+                                                                        {
+                                                                            <span>Nam</span>
+                                                                        }
+                                                                        else if(item.Cv.cv_sex == 2)
+                                                                        {
+                                                                            <span>Nữ</span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span>Khác</span>
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        <b>Tốt nghiệp:</b> @item.Cv.cv_schools
+                                                                    </li>
+                                                                    <li>
+                                                                        <b>Vị trí:</b> @item.Cv.cv_location
+                                                                    </li>
+                                                                    <li>
+                                                                        <b>Nghành nghề chính:</b> @item.Cv.Career.career_name
+                                                                    </li>
+                                                                    <hr />
+                                                                    <li>
+                                                                        <b>Email: </b>@item.Cv.cv_email
+                                                                    </li>
+                                                                    <li>
+                                                                        <b>Số điện thoại:</b> @item.Cv.cv_phone
+                                                                    </li>
+                                                                    <li>
+                                                                        <b>Facebook:</b> <a href="@item.Cv.cv_linkfc" target="_blank">@item.Cv.cv_linkfc</a>
+                                                                    </li>
+                                                                    <hr />
+                                                                    <li>
+                                                                        <b>Tin học: </b> @item.Cv.cv_IT
+                                                                    </li>
+                                                                    <li>
+                                                                        <b>Anh văn: </b> @item.Cv.cv_IT
+                                                                    </li>
+                                                                </ul>
+                                                            </p>
+                                                        </div>
+                                                        <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+                                                            <ul class="list-inline list-inline-dotted mb-0">
+                                                                <li class="list-inline-item"><i class="fas fa-calendar-check-o mr-1"></i> Đã nộp: @item.submit_datecreated.Value.Day/@item.submit_datecreated.Value.Month/@item.submit_datecreated.Value.Year lúc @item.submit_datecreated.Value.Month giờ @item.submit_datecreated.Value.Minute phút</li>
+                                                            </ul>
+                                                            <div class="mt-2 mt-sm-0"> <a href="@Url.Action("DetailCV","CvEmployer", new { id = item.submit_id })" target="_blank" data-abc="true" class="course-button"><i class="fas fa-search"></i></a> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="card blog-horizontal">
+                                                        <div class="card-body">
+                                                            <div class="card-img-actions mr-sm-3 mb-3">
+                                                                <div style="background-image: url('../../Images/Work/wfh-2.jpg'); background-repeat: no-repeat; background-size: 100%; height: 100%; height: 120px; width: 100%;">
+                                                                    <br />
+                                                                    <center>
+                                                                        <div style="width: 70px; height: 70px; background-color: white; border-radius: 30%">
+                                                                            <a href="@Url.Action("DetailWork","View", new { id = item.work_id })" data-toggle="modal" data-abc="true"> <img src="~/Images/Employer/@item.Work.Employer.employer_logo" style="width: 70px; height: 70px;border-radius: 30%" class="img-fluid card-img" alt=""> </a>
+                                                                        </div>
+                                                                    </center>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <h5 class="d-flex font-weight-semibold flex-nowrap my-1"> <a href="#" class="text-default mr-2" data-abc="true">@(item.Work.work_name.Length < 30 ? item.Work.work_name : item.Work.work_name.Substring(0,30) + "...")</a> <span class="text-danger-400 ml-auto text-warning font-weight-bold">@(item.Work.Employer.employer_version == 1 ? "" : "HOT")</span> </h5>
+                                                                <ul class="list-inline list-inline-dotted text-muted mb-0">
+                                                                    <li class="list-inline-item">Cập nhật: </li>
+                                                                    <li class="list-inline-item"> @item.Work.work_dateupdate.Value.Day/@item.Work.work_dateupdate.Value.Month/@item.Work.work_dateupdate.Value.Year lúc @item.Work.work_dateupdate.Value.Hour giờ @item.Work.work_dateupdate.Value.Minute</li>
+                                                                </ul>
+                                                            </div>
+                                                            <style>
+                                                                ul li{
+                                                                    list-style-type: none;
+                                                                }
+                                                            </style>
+                                                            <p>
+                                                                <ul>
+                                                                    <li>Công ty: @(item.Work.Employer.employer_company.Length < 20 ? item.Work.Employer.employer_company : item.Work.Employer.employer_company.Substring(0,20)+"[...]")</li>
+                                                                    <li><b><i class="fas fa-dollar">&nbsp;</i>Lương: </b><a href="#" class="text-red">Đăng nhập để xem lương</a></li>
+                                                                    <li><b><i class="fas fa-address-book">&nbsp;</i>Nghành nghề: </b><span class="text-danger">@item.Work.Career.career_name</span></li>
+                                                                    <li><b><i class="fas fa-sort-numeric-asc">&nbsp;</i>Số lượng cần tuyển: </b>còn <b>@item.Work.work_amount</b> ứng viên</li>
+                                                                    <li><b><i class="fas fa-map-marker">&nbsp;</i>Tỉnh thành: </b>@item.Work.Province.province_name</li>
+                                                                </ul>
+                                                            </p>
+                                                        </div>
+                                                        <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+                                                            <ul class="list-inline list-inline-dotted mb-0">
+                                                                <li class="list-inline-item"><i class="fas fa-calendar-check-o mr-1"></i> Hết hạn: @item.Work.work_deadline.Value.Day/@item.Work.work_deadline.Value.Month/@item.Work.work_deadline.Value.Year</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

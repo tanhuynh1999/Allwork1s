@@ -64,6 +64,8 @@ namespace AllWork1s.Models
         public string cv_companyname { get; set; }
         public string cv_companynametwo { get; set; }
         public string cv_images { get; set; }
+        public Nullable<int> cv_theme { get; set; }
+        public Nullable<System.DateTime> cv_dateupdate { get; set; }
     
         public virtual Career Career { get; set; }
         public virtual User User { get; set; }

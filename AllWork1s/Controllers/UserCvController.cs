@@ -27,5 +27,24 @@ namespace AllWork1s.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        //Quản lý hồ sơ
+        public ActionResult CVID(int ?id)
+        {
+            List<Cv> cv = db.Cvs.Where(n => n.cv_activate == true && n.user_id == id).OrderByDescending(n => n.cv_datecreated).ToList();
+            User userid = (User)Session["user"];
+            if (userid == null)
+            {
+                return Redirect("/");
+            }
+            if(id != userid.user_id)
+            {
+                return Redirect("/UserCV/CVID/" + userid.user_id);
+            }
+            if(userid.career_id == null)
+            {
+                return Redirect("/Setting/UserWork");
+            }
+            return View(cv);
+        }
     }
 }

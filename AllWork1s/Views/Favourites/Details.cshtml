@@ -1,0 +1,43 @@
+﻿@model AllWork1s.Models.Favourite
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Favourite</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.favourite_datecreate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.favourite_datecreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.user_login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.user_login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Work.work_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Work.work_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.favourite_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

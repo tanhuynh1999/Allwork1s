@@ -1,0 +1,103 @@
+﻿@using AllWork1s.Models;
+@{ 
+    User user = (User)Session["user"];
+}
+<div class="card mt-5">
+    <div style="padding: 20px">
+        <div class="row">
+            <div class="col-lg-4">
+                <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" style="width: 100px; border-radius: 50%" />
+                <center><span style="font-size: 13px">Cập nhật ảnh</span></center>
+            </div>
+            <div class="col-lg-8">
+                <p class="mt-3">
+                    Chào bạn trở lại,<br />
+                    <b class="font-weight-bold" style="font-size: 20px">@user.user_nicename</b><br /><br />
+                    <b style="font-size: 15px">Tài khoản miển phí</b><br />
+                    <button class="ui red button w-100 mt-1">Nâng cấp tài khoản</button>
+                </p>
+            </div>
+            <div class="col-lg-12 mt-4">
+                <div class="ui left floated compact">
+                    <div class="ui fitted toggle checkbox w-100">
+                        <input type="checkbox" style="border: 1px solid red">
+                        <label><b style="margin-left: 30%; font-size: 20px;" class="text-danger">Trạng thái tìm việc đang tắt</b></label>
+                    </div>
+                </div>
+                <p class="mt-4">
+                    Bật tìm việc để nhận được việc làm tốt nhất từ AllWork1s. Hồ sơ của bạn sẽ được kích hoạt cho nhà tuyển dụng.
+                </p>
+            </div>
+            <div class="col-lg-12 mt-4">
+                <div class="ui left floated compact">
+                    <div class="ui fitted toggle checkbox w-100">
+                        <input type="checkbox" checked>
+                        <label><b style="margin-left: 30%; font-size: 20px;" class="text-danger">Việc ưu tiên cho NTD</b></label>
+                    </div>
+                </div>
+                <p class="mt-4">
+                    Hệ thống sẽ cập nhật thông tin hồ sơ của bạn và hiển thị vào các trang quản lý của nhà tuyển dụng.
+                </p>
+            </div>
+            <div class="col-lg-12 mt-4">
+                <i class="fa fa-bell">&nbsp;</i>(0 thông báo từ NTD)
+                <hr />
+                <button class="ui red button w-100"><i class="fa fa-cog">&nbsp;</i>Cài đặt ưu tiên việc làm</button>
+                <button class="ui green button w-100 mt-2"><i class="fa fa-edit">&nbsp;</i>Tạo hồ sơ cv chuyện nghiệp</button>
+            </div>
+            <div class="col-lg-12 mt-4">
+                <hr />
+                <center>
+                    <b style="font-size: 20px">Việc làm có thể bạn thích</b>
+                </center>
+                <div class="row">
+                    @*@foreach (var item in works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true && n.career_id == Model.career_id).OrderByDescending(n => n.work_datecreated).Take(4))
+                        {
+                            <div class="col-lg-12 hovercard" style="margin-top: 1px; padding: 6px;">
+                                <div class="card" style="padding: 10px; border-radius: 0px 0px 0px 0px;">
+                                    <div class="ui divided items w-100">
+                                        <div class="item">
+                                            <div class="image">
+                                                <div class="ui two column grid">
+                                                    <div class="column w-100">
+                                                        <div class="ui fluid image">
+                                                            <a class="ui left corner label text-danger">
+                                                                <i class="heart icon"></i>
+                                                            </a>
+                                                            <img src="~/Images/Employer/@item.Employer.employer_logo" style="height: 110px; padding: 10px; width: 100%">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="content" style="font-size: 10px">
+                                                <a class="header">@(item.work_name.Length < 40 ? item.work_name : item.work_name.Substring(0,40) + "...")</a>
+                                                <div class="meta">
+                                                    <span class="cinema"><a>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0, 30) + "...")</a></span>
+                                                </div>
+                                                <div class="description">
+                                                    <p>
+                                                        <i class="fa fa-map-marker">&nbsp;</i>@item.Province.province_name
+                                                    </p>
+                                                </div>
+                                                <div class="extra">
+                                                    <div class="ui right floated">
+                                                        <a class="ui red tag label">HOT</a>
+                                                    </div>
+                                                    <div class="ui">
+                                                        2
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }*@
+                </div>
+                <center>
+                    <a href="#">Xem thêm việc làm liên quan</a>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>

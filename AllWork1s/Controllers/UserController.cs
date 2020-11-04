@@ -35,7 +35,7 @@ namespace AllWork1s.Controllers
         {
             String sEmail = f["user_email"].ToString();
             String sPass = f["user_pass"].ToString();
-            User user = db.Users.Where(n => n.user_activate == true).SingleOrDefault(n => n.user_email == sEmail && n.user_pass == sPass);
+            User user = db.Users.Where(n => n.user_activate == true && n.user_delete == false).SingleOrDefault(n => n.user_email == sEmail && n.user_pass == sPass);
             if(user != null)
             {
                 Session["user"] = user;
@@ -44,7 +44,7 @@ namespace AllWork1s.Controllers
                 if (user.career_id != null)
                 {
 
-                    return Redirect("/UserCv/ViewCV");
+                    return Redirect("/UserCV/CVID/"+user.user_id);
                 }
                 else
                 {
@@ -91,13 +91,15 @@ namespace AllWork1s.Controllers
                 user.user_role = 1;
                 user.user_token = Guid.NewGuid().ToString();
                 user.user_activate = true;
+                user.user_view = true;
+                user.user_delete = false;
                 user.user_datelogin = DateTime.Now;
                 db.SaveChanges();
                 Session["user"] = user;
                 if (user.career_id != null)
                 {
 
-                    return Redirect("/UserCv/ViewCV");
+                    return Redirect("/UserCV/CVID/" + user.user_id);
                 }
                 else
                 {
@@ -164,6 +166,110 @@ namespace AllWork1s.Controllers
 
             Session["user"] = user;
             return Redirect(Request.UrlReferrer.ToString());
+        }
+        //Nộp đơn
+        [HttpPost]
+        public ActionResult SubmitCV([Bind(Include = "submit_id,user_id,work_id,submit_datecreated,cv_id")] Submit submit)
+        {
+            User user = (User)Session["user"];
+            db.Submits.Add(submit);
+            submit.user_id = user.user_id;
+            submit.submit_datecreated = DateTime.Now;
+            db.SaveChanges();
+            Session["TestSubmit"] = "Nộp hồ sơ thành công";
+            Session["user"] = user;
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        //Menu
+        //Viec lam da nop
+        public ActionResult WorkSubmit(int ?id)
+        {
+            List<Submit> submit = db.Submits.Where(n => n.user_id == id).OrderByDescending(n=>n.submit_datecreated).ToList();
+            User userid = (User)Session["user"];
+            if (userid == null)
+            {
+                return Redirect("/");
+            }
+            if (id != userid.user_id)
+            {
+                return Redirect("/User/WorkSubmit/" + userid.user_id);
+            }
+            if (userid.career_id == null)
+            {
+                return Redirect("/Setting/UserWork");
+            }
+            return View(submit);
+        }
+
+        //Yêu thích
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FavouriteWork([Bind(Include = "favourite_id,favourite_datecreate,work_id,user_id,favourite_delete")] Favourite favourite)
+        {
+            User user = (User)Session["user"];
+            db.Favourites.Add(favourite);
+            favourite.favourite_datecreate = DateTime.Now;
+            favourite.favourite_delete = false;
+
+            db.SaveChanges();
+            Session["user"] = user;
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        //viec lam da luu
+        public ActionResult WorkFavourite(int? id)
+        {
+            List<Favourite> favourites = db.Favourites.Where(n => n.user_id == id && n.favourite_delete == false).OrderByDescending(n=>n.favourite_datecreate).ToList();
+            List<Favourite> favouritesdelete = db.Favourites.Where(n => n.user_id == id && n.favourite_delete == true).OrderByDescending(n=>n.favourite_datecreate).ToList();
+            User userid = (User)Session["user"];
+            if (userid == null)
+            {
+                return Redirect("/");
+            }
+            if (id != userid.user_id)
+            {
+                return Redirect("/User/WorkFavourite/" + userid.user_id);
+            }
+            if (userid.career_id == null)
+            {
+                return Redirect("/Setting/UserWork");
+            }
+            ViewBag.delete = favouritesdelete.Count;
+            return View(favourites);
+        }
+
+        //Huy yeu thích
+        public ActionResult CancelFavourite(int ?id)
+        {
+            User user = (User)Session["user"];
+
+            Favourite favourite = db.Favourites.Find(id);
+
+            int idfa = Int32.Parse(id.ToString());
+
+            db.Favourites.Remove(favourite);
+            db.SaveChanges();
+
+
+            Session["user"] = user;
+            return Redirect("/User/WorkFavourite/" + idfa);
+        }
+
+        //Huy yeu thich xem chi tiet
+        public ActionResult CancelFavouriteDetailWork(int ?id)
+        {
+            User user = (User)Session["user"];
+            Favourite favourite = db.Favourites.Find(id);
+
+            int idwork = Int32.Parse(favourite.work_id.ToString());
+
+            db.Favourites.Remove(favourite);
+            db.SaveChanges();
+
+            Session["user"] = user;
+
+            return Redirect("/View/DetailWork/"+idwork);
         }
     }
 }

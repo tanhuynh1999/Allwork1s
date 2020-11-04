@@ -1,0 +1,183 @@
+﻿@model AllWork1s.Models.User
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Action("Css", "HomeAdmin")
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card bg-default">
+            <div class="card-header">
+                <h2 class="text-warning">Thêm ứng viên</h2>
+                <form class="ui form segment" method="post" action="@Url.Action("Create","Users")" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    @ViewBag.ThongBao
+                    <p class="text-danger"><i class="fas fa-sign-in-alt">&nbsp;</i>Thông tin chính</p>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Tài khoản</label>
+                            <input placeholder="Tài khoản" name="user_login" type="text">
+                        </div>
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="text" name="user_email" placeholder="Nhập email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Tên hiển thị</label>
+                            <input placeholder="Mật khẩu" name="user_nicename" type="text">
+                        </div>
+                        <div class="field">
+                            <label>Mật khẩu</label>
+                            <input placeholder="Mật khẩu" name="user_pass" type="password">
+                        </div>
+                    </div>
+                    <p class="text-danger"><i class="fa fa-user">&nbsp;</i>Thông tin phụ</p>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="field">
+                                <label>Ảnh cá nhân</label>
+                                <input type="file" accept="image/*" onchange="preview_image(event)" name="imgUser" style="color: white" />
+                                <img id="output_image" src="~/Images/User/822711_user_512x512.png" style="width: 100%; height: 200px" />
+                                <script>
+                                    function preview_image(event) {
+                                        var reader = new FileReader();
+                                        reader.onload = function () {
+                                            var output = document.getElementById('output_image');
+                                            output.src = reader.result;
+                                        }
+                                        reader.readAsDataURL(event.target.files[0]);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="field">
+                                <label>Nghành nghề</label>
+                                <textarea name="user_industryloving" style="height: 15px" class="form-control" placeholder="Nhập nghành nghề"></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Kỹ năng</label>
+                                <textarea name="user_skill" style="height: 15px" class="form-control" placeholder="Nhập kỹ năng"></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Sở thích</label>
+                                <textarea name="user_interests" style="height: 15px" class="form-control" placeholder="Nhập sở thích"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-danger"><i class="fa fa-cog">&nbsp;</i>Cài đặt</p>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Phiên bản</label>
+                            <select class="form-control" name="user_role">
+                                <option value="1">Free</option>
+                                <option value="2">Cao cấp</option>
+                                <option value="3">Khử nghiệm</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Nghành nghề cài đặt</label>
+                            @Html.DropDownList("career_id", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Hoạt động</label>
+                            <select class="form-control" name="user_activate">
+                                <option value="true">Cho phép hoạt động sau khi tạo</option>
+                                <option value="false">Không cho phép hoạt động sau khi tạo</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Hiển thị</label>
+                            <select class="form-control" name="user_view">
+                                <option value="true">Cho phép hiển thị trang cá nhân</option>
+                                <option value="false">Không cho phép hiển thị trang cá nhân</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="Submit" class="ui primary submit button">Tạo tài khoản</button>
+                    </div>
+                    <div class="ui error message"></div>
+                </form>
+
+                <div>
+                    @Html.ActionLink("Trở vể", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.ui.form')
+  .form({
+    fields: {
+      user_email: {
+        identifier: 'user_email',
+        rules: [
+          {
+            type   : 'email',
+            prompt : 'Vui lòng nhập đúng định dạng email'
+          }
+        ]
+      },
+      user_pass: {
+        identifier: 'user_pass',
+        rules: [
+          {
+            type   : 'minLength[6]',
+            prompt : 'Mật khẩu phải trên 5 ký tự'
+          }
+        ]
+      },
+      user_nicename: {
+        identifier: 'user_nicename',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Vui lòng nhập tên hiển thị'
+          }
+        ]
+      },
+      imgUser: {
+        identifier: 'imgUser',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Vui lòng chọn ảnh'
+          }
+        ]
+      },
+      password: {
+        identifier: 'password',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter a password'
+          },
+          {
+            type   : 'minLength[6]',
+            prompt : 'Your password must be at least {ruleValue} characters'
+          }
+        ]
+      },
+      terms: {
+        identifier: 'terms',
+        rules: [
+          {
+            type   : 'checked',
+            prompt : 'You must agree to the terms and conditions'
+          }
+        ]
+      }
+    }
+  })
+;
+</script>
+

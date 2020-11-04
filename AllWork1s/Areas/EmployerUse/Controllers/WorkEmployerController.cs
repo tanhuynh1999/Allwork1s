@@ -39,34 +39,10 @@ namespace AllWork1s.Areas.EmployerUse.Controllers
         {
             Employer employer = (Employer)Session["employer"];
 
-            //Lay ten file
-            var nameone = Path.GetFileName(imgOne.FileName);
-            var nametwo = Path.GetFileName(imgTwo.FileName);
-            var namethree = Path.GetFileName(imgThree.FileName);
-            //Dua vao file
-            var paone = Path.Combine(Server.MapPath("~/Images/Employer"), nameone);
-            var patwo = Path.Combine(Server.MapPath("~/Images/Employer"), nametwo);
-            var pathree = Path.Combine(Server.MapPath("~/Images/Employer"), namethree);
-
-            if (imgOne == null || imgTwo == null || imgThree == null)
+            if(imgOne == null || imgTwo == null || imgThree == null)
             {
-                ViewBag.ThongBao = "Chọn hình ảnh";
-            }
-            else if(System.IO.File.Exists(paone) || System.IO.File.Exists(patwo) || System.IO.File.Exists(pathree))
-            {
-                ViewBag.ThongBao = "Hình ảnh đã tồn tại!";
-            }
-            else
-            {
-                imgOne.SaveAs(paone);
-                imgTwo.SaveAs(patwo);
-                imgThree.SaveAs(pathree);
 
                 db.Works.Add(work);
-
-                work.work_image = imgOne.FileName;
-                work.work_imagetwo = imgTwo.FileName;
-                work.work_imgathree = imgThree.FileName;
 
                 if (employer.employer_version == 3 || employer.employer_version == 2)
                 {
@@ -83,16 +59,87 @@ namespace AllWork1s.Areas.EmployerUse.Controllers
                 work.work_love = 1;
                 work.work_delete = false;
                 work.work_del = false;
+                
 
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "ViewEmployer");
+            }
+            else
+            {
+                //Lay ten file
+                var nameone = Path.GetFileName(imgOne.FileName);
+                var nametwo = Path.GetFileName(imgTwo.FileName);
+                var namethree = Path.GetFileName(imgThree.FileName);
+                //Dua vao file
+                var paone = Path.Combine(Server.MapPath("~/Images/Employer"), nameone);
+                var patwo = Path.Combine(Server.MapPath("~/Images/Employer"), nametwo);
+                var pathree = Path.Combine(Server.MapPath("~/Images/Employer"), namethree);
+
+                if (imgOne == null || imgTwo == null || imgThree == null)
+                {
+                    ViewBag.ThongBao = "Chọn hình ảnh";
+                }
+                else if (System.IO.File.Exists(paone) || System.IO.File.Exists(patwo) || System.IO.File.Exists(pathree))
+                {
+                    ViewBag.ThongBao = "Hình ảnh đã tồn tại!";
+                }
+                else
+                {
+                    imgOne.SaveAs(paone);
+                    imgTwo.SaveAs(patwo);
+                    imgThree.SaveAs(pathree);
+
+                    db.Works.Add(work);
+
+                    work.work_image = imgOne.FileName;
+                    work.work_imagetwo = imgTwo.FileName;
+                    work.work_imgathree = imgThree.FileName;
+
+                    if (employer.employer_version == 3 || employer.employer_version == 2)
+                    {
+                        work.work_activate = true;
+                    }
+                    else
+                    {
+                        work.work_activate = false;
+                    }
+                    work.work_option = true;
+                    work.employer_id = employer.employer_id;
+                    work.work_datecreated = DateTime.Now;
+                    work.work_view = 1;
+                    work.work_love = 1;
+                    work.work_delete = false;
+                    work.work_del = false;
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index", "ViewEmployer");
+                }
             }
             ViewBag.career_id = new SelectList(db.Careers, "career_id", "career_name", work.career_id);
             ViewBag.form_id = new SelectList(db.Forms, "form_id", "form_name", work.form_id);
             ViewBag.province_id = new SelectList(db.Provinces, "province_id", "province_name", work.province_id);
 
             return View(work);
+        }
+        public ActionResult IndexWorkEmployer(int ?id)
+        {
+            Employer employer = (Employer)Session["employer"];
+            if (employer == null)
+            {
+                return RedirectToAction("Login", "Employer");
+            }
+            if (id != employer.employer_id)
+            {
+                return RedirectToAction("Error", "ViewEmployer");
+            }
+            if (employer.employer_personalpage == false || employer.employer_personalpage == null)
+            {
+                return RedirectToAction("Createemployer", "Employer", new { id = employer.employer_id });
+            }
+            List<Work> works = db.Works.Where(n => n.work_activate == true && n.work_del == false && n.employer_id == id).OrderByDescending(n => n.work_datecreated).ToList();
+            return View(works);
         }
     }
 }

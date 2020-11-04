@@ -284,7 +284,7 @@
                                     </div>
                                 }
                             </div>
-                            @foreach (var item in Model.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_del == true).OrderByDescending(n => n.work_datecreated))
+                            @foreach (var item in Model.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_delete == false).OrderByDescending(n => n.work_datecreated))
                             {
                                 <div class="col-lg-12 mt-3">
                                     <div class="card-media">

@@ -1,0 +1,406 @@
+﻿@using AllWork1s.Models;
+@model List<Work>
+@{
+    ViewBag.Title = "IndexWorkEmployer";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/Semantic-UI-CSS-master/semantic.min.css" rel="stylesheet" />
+<script src="~/Content/Semantic-UI-CSS-master/semantic.min.js"></script>
+<div class="statistics">
+    <div class="row">
+        <div class="col-xl-12 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-12 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <div class="row" style="padding: 20px">
+                            <div class="col-lg-6">
+                                <div class="ui search">
+                                    <div class="ui icon input" style="width: 100%">
+                                        <input class="prompt" type="text" placeholder="Tên công việc, mã công việc...">
+                                        <i class="search icon"></i>
+                                    </div>
+                                    <div class="results"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Tất cả</span>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Tất cả giới tính</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Lương</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Hình thức</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Sắp xếp mới nhất</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Tình trạng</span>
+                                            <div class="menu">
+                                                <div class="ui icon search input">
+                                                    <i class="search icon"></i>
+                                                    <input type="text" placeholder="Search tags...">
+                                                </div>
+                                                <div class="divider"></div>
+                                                <div class="header">
+                                                    <i class="tags icon"></i>
+                                                    Tag Label
+                                                </div>
+                                                <div class="scrolling menu">
+                                                    <div class="item">
+                                                        <div class="ui red empty circular label"></div>
+                                                        Important
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui blue empty circular label"></div>
+                                                        Announcement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui black empty circular label"></div>
+                                                        Cannot Fix
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui purple empty circular label"></div>
+                                                        News
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui orange empty circular label"></div>
+                                                        Enhancement
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui empty circular label"></div>
+                                                        Change Declined
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui yellow empty circular label"></div>
+                                                        Off Topic
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui pink empty circular label"></div>
+                                                        Interesting
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="ui green empty circular label"></div>
+                                                        Discussion
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="ui dropdown">
+                                            <span class="text" style="font-size: 15px">Thùng rác</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('.ui.dropdown')
+                .dropdown()
+                ;
+        </script>
+        <div class="col-xl-12 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-12 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <table class="table table-striped">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th>Mã</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên công việc</th>
+                                    <th>Ngày hết hạn</th>
+                                    <th>Lương trả</th>
+                                    <th>Giới tính cần</th>
+                                    <th>Hình thức</th>
+                                    <th>Tỉnh thành</th>
+                                    <th>Hoạt động</th>
+                                    <th>Bật/Tắt</th>
+                                    <th>Tùy chọn</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.work_id</td>
+                                        <td>
+                                            <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 50px; height: 50px" />
+                                        </td>
+                                        <td>
+                                            @item.work_name
+                                        </td>
+                                        <td>
+                                            @item.work_deadline
+                                        </td>
+                                        <td>
+                                            @item.work_pricemin - @item.work_pricemax @item.work_symbol
+                                        </td>
+                                        <td>
+                                            @if (item.work_sex == 2)
+                                            {
+                                                <span>Nam</span>
+                                            }
+                                            else if (item.work_sex == 3)
+                                            {
+                                                <span>Nữ</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Không yêu cầu</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.Form.form_name
+                                        </td>
+                                        <td>
+                                            @item.Province.province_name
+                                        </td>
+                                        <td>
+                                            @if (item.work_activate == true)
+                                            {
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-times-circle text-danger"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.work_option == true)
+                                            {
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-times-circle text-danger"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a><i class="fas fa-eye"></i></a>
+                                            <a><i class="fas fa-edit"></i></a>
+                                            <a><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+﻿@model AllWork1s.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Action("Css", "HomeAdmin")
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card bg-default">
+            <div class="card-header">
+                <h2 class="text-warning">Sửa ứng viên "@Model.user_email"</h2>
+                <form class="ui form segment" method="post" action="@Url.Action("Edit","Users")" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.user_id)
+                    @ViewBag.ThongBao
+                    <input type="hidden" value="@Model.user_id" name="user_id" />
+                    <input type="hidden" value="@Model.user_datecreated" name="user_datecreated" />
+                    <input type="hidden" value="@Model.user_datelogin" name="user_datelogin" />
+                    <input type="hidden" value="@Model.user_image" name="user_image" />
+                    <p class="text-danger"><i class="fas fa-sign-in-alt">&nbsp;</i>Thông tin chính</p>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Tài khoản</label>
+                            <input placeholder="Tài khoản" name="user_login" type="text" value="@Model.user_login">
+                        </div>
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="text" name="user_email" placeholder="Nhập email" class="form-control" value="@Model.user_email" />
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Tên hiển thị</label>
+                            <input placeholder="Mật khẩu" name="user_nicename" type="text" value="@Model.user_nicename">
+                        </div>
+                        <div class="field">
+                            <label>Mật khẩu</label>
+                            <input placeholder="Mật khẩu" name="user_pass" type="password" value="@Model.user_pass">
+                        </div>
+                    </div>
+                    <p class="text-danger"><i class="fa fa-user">&nbsp;</i>Thông tin phụ</p>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="field">
+                                <label>Ảnh cá nhân</label>
+                                <input type="file" accept="image/*" onchange="preview_image(event)" name="imgUser" style="color: white" />
+                                <img id="output_image" src="~/Images/User/@Model.user_image" style="width: 100%; height: 200px" />
+                                <script>
+                                    function preview_image(event) {
+                                        var reader = new FileReader();
+                                        reader.onload = function () {
+                                            var output = document.getElementById('output_image');
+                                            output.src = reader.result;
+                                        }
+                                        reader.readAsDataURL(event.target.files[0]);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="field">
+                                <label>Nghành nghề</label>
+                                <textarea name="user_industryloving" style="height: 15px" class="form-control" placeholder="Nhập nghành nghề">@Model.user_industryloving</textarea>
+                            </div>
+                            <div class="field">
+                                <label>Kỹ năng</label>
+                                <textarea name="user_skill" style="height: 15px" class="form-control" placeholder="Nhập kỹ năng">@Model.user_skill</textarea>
+                            </div>
+                            <div class="field">
+                                <label>Sở thích</label>
+                                <textarea name="user_interests" style="height: 15px" class="form-control" placeholder="Nhập sở thích">@Model.user_interests</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-danger"><i class="fa fa-cog">&nbsp;</i>Cài đặt</p>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Phiên bản</label>
+                            <select class="form-control" name="user_role">
+                                <option value="1" @(Model.user_role == 1 ? "selected" : "")>Free</option>
+                                <option value="2" @(Model.user_role == 2 ? "selected" : "")>Cao cấp</option>
+                                <option value="3" @(Model.user_role == 3 ? "selected" : "")>Khử nghiệm</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Nghành nghề cài đặt</label>
+                            @Html.DropDownList("career_id", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Hoạt động</label>
+                            <select class="form-control" name="user_activate">
+                                <option value="true" @(Model.user_activate == true ? "selected" : "")>Cho phép hoạt động sau khi tạo</option>
+                                <option value="false" @(Model.user_activate == false ? "selected" : "")>Không cho phép hoạt động sau khi tạo</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Hiển thị</label>
+                            <select class="form-control" name="user_view">
+                                <option value="true" @(Model.user_activate == true ? "selected" : "")>Cho phép hiển thị trang cá nhân</option>
+                                <option value="false" @(Model.user_activate == false ? "selected" : "")>Không cho phép hiển thị trang cá nhân</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="Submit" class="ui primary submit button">Lưu thay đổi</button>
+                    </div>
+                    <div class="ui error message"></div>
+                </form>
+
+
+                <div>
+                    @Html.ActionLink("Trở về", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

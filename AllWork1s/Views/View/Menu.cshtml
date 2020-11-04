@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white font-weight-bold" href="index.html">Mẫu CV <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white font-weight-bold" href="@Url.Action("ViewCV","UserCV")">Mẫu CV <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white font-weight-bold" href="@Url.Action("AllWork","View")">Việc làm</a>
@@ -44,14 +44,14 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right bg-white" aria-labelledby="navbar-default_dropdown_1" style="width: 300px;">
                                     <a class="dropdown-item" href="javascript:;" style="font-size: 15px !important"><b class="text-dark">Mã ứng viên: @user.user_id</b></a>
-                                    <a class="dropdown-item" href="javascript:;" style="font-size: 15px !important">Tạo CV xin việc</a>
+                                    <a class="dropdown-item" href="@Url.Action("ViewCV","UserCv")" style="font-size: 15px !important">Tạo CV xin việc</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("PersonalInformation","User", new { id = user.user_id })"><i class="fa fa-user">&nbsp;</i>Thông tin tài khoản</a>
-                                    <a class="dropdown-item" href="@Url.Action("ViewCV","CVUser")"><i class="fa fa-address-card">&nbsp;</i>Quản lý hồ sơ</a>
-                                    <a class="dropdown-item" href="@Url.Action("WorkUser","Work")"><i class="fa fa-archive">&nbsp;</i>Việc làm đã nộp</a>
-                                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-heart">&nbsp;</i>Việc làm đã lưu</a>
-                                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-eye">&nbsp;</i>NTD xem hồ sơ</a>
-                                    <a class="dropdown-item" href="javascript:;"><i class="fa fa-search">&nbsp;</i>Cài đặt tìm việc</a>
+                                    <a class="dropdown-item" href="@Url.Action("CVID","UserCV", new { id = user.user_id })"><i class="fa fa-address-card">&nbsp;</i>Quản lý hồ sơ</a>
+                                    <a class="dropdown-item" href="@Url.Action("WorkSubmit","User", new { id = user.user_id })"><i class="fa fa-archive">&nbsp;</i>Việc làm đã nộp</a>
+                                    <a class="dropdown-item" href="@Url.Action("WorkFavourite","User", new { id = user.user_id })"><i class="fa fa-heart">&nbsp;</i>Việc làm đã lưu</a>
+                                    <a class="dropdown-item" href=""><i class="fa fa-eye">&nbsp;</i>NTD xem hồ sơ</a>
+                                    <a class="dropdown-item" href="@Url.Action("SettingWork","View", new { id = user.user_id })"><i class="fa fa-search">&nbsp;</i>Cài đặt tìm việc</a>
                                     <a class="dropdown-item" href="javascript:;"><i class="fas fa-user-cog">&nbsp;</i>Cài đặt tài khoản</a>
                                     <a class="dropdown-item" href="javascript:;"><i class="fa fa-cog">&nbsp;</i>Tùy chọn</a>
                                     <a class="dropdown-item" href="javascript:;"><i class="fas fa-level-up-alt">&nbsp;</i>Nâng cấp tài khoản</a>

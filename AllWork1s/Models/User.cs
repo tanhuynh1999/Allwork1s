@@ -20,6 +20,7 @@ namespace AllWork1s.Models
             this.Cvs = new HashSet<Cv>();
             this.Likes = new HashSet<Like>();
             this.Submits = new HashSet<Submit>();
+            this.Favourites = new HashSet<Favourite>();
         }
     
         public int user_id { get; set; }
@@ -38,6 +39,7 @@ namespace AllWork1s.Models
         public string user_interests { get; set; }
         public Nullable<bool> user_view { get; set; }
         public Nullable<int> career_id { get; set; }
+        public Nullable<bool> user_delete { get; set; }
     
         public virtual Career Career { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,5 +48,7 @@ namespace AllWork1s.Models
         public virtual ICollection<Like> Likes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Submit> Submits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Favourite> Favourites { get; set; }
     }
 }

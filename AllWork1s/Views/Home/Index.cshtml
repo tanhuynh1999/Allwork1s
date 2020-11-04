@@ -5,10 +5,10 @@
     DataWorkEntities db = new DataWorkEntities();
     User user = (User)Session["user"];
 }
-@{ 
+@{
     //De xuat
     //-De xuat chua dang nhap-
-    List<Work> wpnl = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_delete == false).OrderByDescending(n => n.work_datecreated).Take(8).ToList();
+    List<Work> wpnl = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_delete == false).OrderByDescending(n => n.work_datecreated).Take(9).ToList();
     //-De xuat da dang nhap-
 
     //Viec làm hot nhất
@@ -18,7 +18,11 @@
     List<Work> woutstanding = db.Works.Where(n => n.work_activate == true && n.work_option == true && n.Employer.employer_activate == true && n.work_delete == false && n.Employer.employer_version == 2).OrderByDescending(n => n.work_datecreated).Take(8).ToList();
 
 }
+
 @Html.Action("Css", "Home")
+
+
+<link href="~/Content/card.css" rel="stylesheet" />
 <div class="w3l-hero-headers-9">
     <section class="slide slide-one">
         <div class="container" style="max-width: 1150px">
@@ -34,13 +38,13 @@
                     </ul>
                     @if (user != null)
                     {
-                        <a href="services.html" class="btn logo-button top-margin">Tạo CV</a>
+                        <a href="@Url.Action("ViewCV","UserCV")" class="btn logo-button top-margin">Tạo CV</a>
                     }
                     else
                     {
                         <a href="@Url.Action("Login","User")" class="btn logo-button top-margin">Tạo CV</a>
                     }
-                    <a href="services.html" class="btn logo-button top-margin">Tìm việc</a>
+                    <a href="@Url.Action("AllWork","View")" class="btn logo-button top-margin">Tìm việc</a>
                     <h6 class="para">Đảm bảo <strong>có việc nhanh </strong>sau khi nộp đơn.</h6>
                 </div>
                 <div class="image-postion col-lg-7" style="padding: 0px 0px 0px 0px">
@@ -87,10 +91,8 @@
 </section>
 <section class="w3l-call-to-action_9">
     <div class="">
-        <div class="container" style="max-width: 1500px">
-            <div class="col-lg-12">
-                <h2 style="text-align: left">VIỆC LÀM ĐỀ XUẤT</h2>
-            </div>
+        <div class="container-fluid">
+            <h2 style="text-align: left">VIỆC LÀM ĐỀ XUẤT</h2>
             <div class="row">
                 @if (user != null)
                 {
@@ -100,38 +102,44 @@
                 {
                     foreach (var item in wpnl)
                     {
-                        <div class="col-lg-3">
-                            <figure class="snip1253 hover" style=" max-width: 96%;">
-                                <div class="image">
-                                    <img src="~/Images/Employer/cover_trang_chu.jpg" alt="sample66" class="w-100" style="height: 170px"/>
-                                    <center>
-                                        <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 150px; height: 100px; z-index: 10000; margin-top: -45%" />
-                                    </center>
-                                </div>
-                                <figcaption>
-                                    <div class="date"><span class="day">@item.work_datesend.Value.Day</span><span class="month">@item.work_datesend.Value.Month</span></div>
-                                    <h3>@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</h3>
+                        <div class="col-md-4 mt-1" style="padding: 9px">
+                            <div class="card blog-horizontal">
+                                <div class="card-body">
+                                    <div class="card-img-actions mr-sm-3 mb-3">
+                                        <div style="background-image: url('../../Images/Work/wfh-2.jpg'); background-repeat: no-repeat; background-size: 100%; height: 100%; height: 120px; width: 100%;">
+                                            <br />
+                                            <center>
+                                                <div style="width: 70px; height: 70px; background-color: white; border-radius: 30%">
+                                                    <a href="@Url.Action("DetailWork","View", new { id = item.work_id })" data-toggle="modal" data-abc="true"> <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 70px; height: 70px;border-radius: 30%" class="img-fluid card-img" alt=""> </a>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h5 class="d-flex font-weight-semibold flex-nowrap my-1"> <a href="#" class="text-default mr-2" data-abc="true">@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</a> <span class="text-danger-400 ml-auto text-warning font-weight-bold">@(item.Employer.employer_version == 1 ? "" : "HOT")</span> </h5>
+                                        <ul class="list-inline list-inline-dotted text-muted mb-0">
+                                            <li class="list-inline-item">Cập nhật: </li>
+                                            <li class="list-inline-item"> @item.work_dateupdate.Value.Day/@item.work_dateupdate.Value.Month/@item.work_dateupdate.Value.Year lúc @item.work_dateupdate.Value.Hour giờ @item.work_dateupdate.Value.Minute</li>
+                                        </ul>
+                                    </div>
                                     <p>
                                         <ul>
-                                            <li>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,30) + "...")</li>
-                                            <li class="mt-2"><b><i class="fa fa-map-marker">&nbsp;</i></b>@item.Province.province_name</li>
-                                            <li class="mt-2">
-                                                @if (user != null)
-                                                {
-
-                                                }
-                                                else
-                                                {
-                                                    <span><b><i class="fas fa-dollar-sign">&nbsp;</i></b><span style="color: red">Đăng nhập xem lương</span></span>
-                                                }
-                                            </li>
+                                            <li>Công ty: @(item.Employer.employer_company.Length < 20 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,20)+"[...]")</li>
+                                            <li><b><i class="fa fa-dollar">&nbsp;</i>Lương: </b><a href="#" class="text-red">Đăng nhập để xem lương</a></li>
+                                            <li><b><i class="fa fa-address-book">&nbsp;</i>Nghành nghề: </b><span class="text-danger">@item.Career.career_name</span></li>
+                                            <li><b><i class="fa fa-sort-numeric-asc">&nbsp;</i>Số lượng cần tuyển: </b>còn <b>@item.work_amount</b> ứng viên</li>
+                                            <li><b><i class="fa fa-map-marker">&nbsp;</i>Tỉnh thành: </b>@item.Province.province_name</li>
                                         </ul>
                                     </p>
-                                </figcaption>
-                                <footer>
-                                    Nghành nghề: @item.Career.career_name
-                                </footer><a href="@Url.Action("DetailWork","View", new { id = item.work_id })"></a>
-                            </figure>
+                                </div>
+                                <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+                                    <ul class="list-inline list-inline-dotted mb-0">
+                                        <li class="list-inline-item"><i class="fa fa-heart mr-1">&nbsp;</i>Lưu việc này</li>
+                                        <li class="list-inline-item"><i class="fa fa-calendar-check-o mr-1"></i> Hết hạn: @item.work_deadline.Value.Day/@item.work_deadline.Value.Month/@item.work_deadline.Value.Year</li>
+                                    </ul>
+                                    <div class="mt-2 mt-sm-0"> <a href="@Url.Action("DetailWork","View", new { id = item.work_id })" data-abc="true" class="course-button"><i class="fa fa-search"></i></a> </div>
+                                </div>
+                            </div>
                         </div>
                     }
                 }
@@ -144,7 +152,7 @@
         </div>
     </div>
 </section>
-<div class="container mt-5" style="max-width: 1500px">
+<div class="container-fluid mt-5" style="max-width: 1500px">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -172,7 +180,7 @@
         </a>
     </div>
 </div>
-<div class="container mt-5" style="max-width: 1500px">
+<div class="container-fluid mt-5">
     <div class="row">
         <div class="col-lg-12">
             <h3>VIỆC LÀM HOT NHẤT</h3>
@@ -181,38 +189,44 @@
             <div class="row">
                 @foreach (var item in whot)
                 {
-                    <div class="col-lg-3">
-                        <figure class="snip1253 hover" style=" max-width: 96%;">
-                            <div class="image">
-                                <img src="~/Images/Employer/cover_trang_chu.jpg" alt="sample66" class="w-100" style="height: 170px" />
-                                <center>
-                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 150px; height: 100px; z-index: 10000; margin-top: -45%" />
-                                </center>
-                            </div>
-                            <figcaption>
-                                <div class="date"><span class="day">@item.work_datesend.Value.Day</span><span class="month">@item.work_datesend.Value.Month</span></div>
-                                <h3>@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</h3>
+                    <div class="col-md-4 mt-1" style="padding: 9px">
+                        <div class="card blog-horizontal">
+                            <div class="card-body">
+                                <div class="card-img-actions mr-sm-3 mb-3">
+                                    <div style="background-image: url('../../Images/Work/wfh-2.jpg'); background-repeat: no-repeat; background-size: 100%; height: 100%; height: 120px; width: 100%;">
+                                        <br />
+                                        <center>
+                                            <div style="width: 70px; height: 70px; background-color: white; border-radius: 30%">
+                                                <a href="@Url.Action("DetailWork","View", new { id = item.work_id })" data-toggle="modal" data-abc="true"> <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 70px; height: 70px;border-radius: 30%" class="img-fluid card-img" alt=""> </a>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="d-flex font-weight-semibold flex-nowrap my-1"> <a href="#" class="text-default mr-2" data-abc="true">@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</a> <span class="text-danger-400 ml-auto text-warning font-weight-bold">@(item.Employer.employer_version == 1 ? "" : "HOT")</span> </h5>
+                                    <ul class="list-inline list-inline-dotted text-muted mb-0">
+                                        <li class="list-inline-item">Cập nhật: </li>
+                                        <li class="list-inline-item"> @item.work_dateupdate.Value.Day/@item.work_dateupdate.Value.Month/@item.work_dateupdate.Value.Year lúc @item.work_dateupdate.Value.Hour giờ @item.work_dateupdate.Value.Minute</li>
+                                    </ul>
+                                </div>
                                 <p>
                                     <ul>
-                                        <li>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,30) + "...")</li>
-                                        <li class="mt-2"><b><i class="fa fa-map-marker">&nbsp;</i></b>@item.Province.province_name</li>
-                                        <li class="mt-2">
-                                            @if (user != null)
-                                            {
-
-                                            }
-                                            else
-                                            {
-                                                <span><b><i class="fas fa-dollar-sign">&nbsp;</i></b><span style="color: red">Đăng nhập xem lương</span></span>
-                                            }
-                                        </li>
+                                        <li>Công ty: @(item.Employer.employer_company.Length < 20 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,20)+"[...]")</li>
+                                        <li><b><i class="fa fa-dollar">&nbsp;</i>Lương: </b><a href="#" class="text-red">Đăng nhập để xem lương</a></li>
+                                        <li><b><i class="fa fa-address-book">&nbsp;</i>Nghành nghề: </b><span class="text-danger">@item.Career.career_name</span></li>
+                                        <li><b><i class="fa fa-sort-numeric-asc">&nbsp;</i>Số lượng cần tuyển: </b>còn <b>@item.work_amount</b> ứng viên</li>
+                                        <li><b><i class="fa fa-map-marker">&nbsp;</i>Tỉnh thành: </b>@item.Province.province_name</li>
                                     </ul>
                                 </p>
-                            </figcaption>
-                            <footer>
-                                Nghành nghề: @item.Career.career_name
-                            </footer><a href="@Url.Action("DetailWork","View", new { id = item.work_id })"></a>
-                        </figure>
+                            </div>
+                            <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+                                <ul class="list-inline list-inline-dotted mb-0">
+                                    <li class="list-inline-item"><i class="fa fa-heart mr-1">&nbsp;</i>Lưu việc này</li>
+                                    <li class="list-inline-item"><i class="fa fa-calendar-check-o mr-1"></i> Hết hạn: @item.work_deadline.Value.Day/@item.work_deadline.Value.Month/@item.work_deadline.Value.Year</li>
+                                </ul>
+                                <div class="mt-2 mt-sm-0"> <a href="@Url.Action("DetailWork","View", new { id = item.work_id })" data-abc="true" class="course-button"><i class="fa fa-search"></i></a> </div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
@@ -232,7 +246,7 @@
         </div>
     </div>
 </div>
-<div class="container mt-5" style="max-width: 1500px">
+<div class="container-fluid mt-5">
     <div class="row">
         <div class="col-lg-12">
             <h3>VIỆC LÀM NỔI BẬC</h3>
@@ -241,38 +255,44 @@
             <div class="row">
                 @foreach (var item in whot)
                 {
-                    <div class="col-lg-3">
-                        <figure class="snip1253 hover" style=" max-width: 96%;">
-                            <div class="image">
-                                <img src="~/Images/Employer/cover_trang_chu.jpg" alt="sample66" class="w-100" style="height: 170px" />
-                                <center>
-                                    <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 150px; height: 100px; z-index: 10000; margin-top: -45%" />
-                                </center>
-                            </div>
-                            <figcaption>
-                                <div class="date"><span class="day">@item.work_datesend.Value.Day</span><span class="month">@item.work_datesend.Value.Month</span></div>
-                                <h3>@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</h3>
+                    <div class="col-md-4 mt-1" style="padding: 9px">
+                        <div class="card blog-horizontal">
+                            <div class="card-body">
+                                <div class="card-img-actions mr-sm-3 mb-3">
+                                    <div style="background-image: url('../../Images/Work/wfh-2.jpg'); background-repeat: no-repeat; background-size: 100%; height: 100%; height: 120px; width: 100%;">
+                                        <br />
+                                        <center>
+                                            <div style="width: 70px; height: 70px; background-color: white; border-radius: 30%">
+                                                <a href="@Url.Action("DetailWork","View", new { id = item.work_id })" data-toggle="modal" data-abc="true"> <img src="~/Images/Employer/@item.Employer.employer_logo" style="width: 70px; height: 70px;border-radius: 30%" class="img-fluid card-img" alt=""> </a>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="d-flex font-weight-semibold flex-nowrap my-1"> <a href="#" class="text-default mr-2" data-abc="true">@(item.work_name.Length < 30 ? item.work_name : item.work_name.Substring(0,30) + "...")</a> <span class="text-danger-400 ml-auto text-warning font-weight-bold">@(item.Employer.employer_version == 1 ? "" : "HOT")</span> </h5>
+                                    <ul class="list-inline list-inline-dotted text-muted mb-0">
+                                        <li class="list-inline-item">Cập nhật: </li>
+                                        <li class="list-inline-item"> @item.work_dateupdate.Value.Day/@item.work_dateupdate.Value.Month/@item.work_dateupdate.Value.Year lúc @item.work_dateupdate.Value.Hour giờ @item.work_dateupdate.Value.Minute</li>
+                                    </ul>
+                                </div>
                                 <p>
                                     <ul>
-                                        <li>@(item.Employer.employer_company.Length < 30 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,30) + "...")</li>
-                                        <li class="mt-2"><b><i class="fa fa-map-marker">&nbsp;</i></b>@item.Province.province_name</li>
-                                        <li class="mt-2">
-                                            @if (user != null)
-                                            {
-
-                                            }
-                                            else
-                                            {
-                                                <span><b><i class="fas fa-dollar-sign">&nbsp;</i></b><span style="color: red">Đăng nhập xem lương</span></span>
-                                            }
-                                        </li>
+                                        <li>Công ty: @(item.Employer.employer_company.Length < 20 ? item.Employer.employer_company : item.Employer.employer_company.Substring(0,20)+"[...]")</li>
+                                        <li><b><i class="fa fa-dollar">&nbsp;</i>Lương: </b><a href="#" class="text-red">Đăng nhập để xem lương</a></li>
+                                        <li><b><i class="fa fa-address-book">&nbsp;</i>Nghành nghề: </b><span class="text-danger">@item.Career.career_name</span></li>
+                                        <li><b><i class="fa fa-sort-numeric-asc">&nbsp;</i>Số lượng cần tuyển: </b>còn <b>@item.work_amount</b> ứng viên</li>
+                                        <li><b><i class="fa fa-map-marker">&nbsp;</i>Tỉnh thành: </b>@item.Province.province_name</li>
                                     </ul>
                                 </p>
-                            </figcaption>
-                            <footer>
-                                Nghành nghề: @item.Career.career_name
-                            </footer><a href="@Url.Action("DetailWork","View", new { id = item.work_id })"></a>
-                        </figure>
+                            </div>
+                            <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+                                <ul class="list-inline list-inline-dotted mb-0">
+                                    <li class="list-inline-item"><i class="fa fa-heart mr-1">&nbsp;</i>Lưu việc này</li>
+                                    <li class="list-inline-item"><i class="fa fa-calendar-check-o mr-1"></i> Hết hạn: @item.work_deadline.Value.Day/@item.work_deadline.Value.Month/@item.work_deadline.Value.Year</li>
+                                </ul>
+                                <div class="mt-2 mt-sm-0"> <a href="@Url.Action("DetailWork","View", new { id = item.work_id })" data-abc="true" class="course-button"><i class="fa fa-search"></i></a> </div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>

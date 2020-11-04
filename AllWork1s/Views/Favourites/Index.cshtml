@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AllWork1s.Models.Favourite>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.favourite_datecreate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.user_login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Work.work_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.favourite_datecreate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.user_login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Work.work_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.favourite_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.favourite_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.favourite_id })
+        </td>
+    </tr>
+}
+
+</table>

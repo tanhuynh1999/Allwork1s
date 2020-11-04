@@ -36,5 +36,7 @@ namespace AllWork1s.Models
         public virtual DbSet<Theme> Themes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Work> Works { get; set; }
+        public virtual DbSet<Favourite> Favourites { get; set; }
+        public virtual DbSet<Body> Bodies { get; set; }
     }
 }

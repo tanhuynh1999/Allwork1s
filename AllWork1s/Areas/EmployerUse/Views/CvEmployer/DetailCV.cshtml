@@ -1,0 +1,295 @@
+﻿@using AllWork1s.Models;
+@model Submit
+@{
+    ViewBag.Title = "DetailCV";
+    Layout = "~/Areas/EmployerUse/Views/Shared/_LayoutEmployer.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/Semantic-UI-CSS-master/semantic.min.css" rel="stylesheet" />
+<script src="~/Content/Semantic-UI-CSS-master/semantic.min.js"></script>
+<link href="~/Content/card.css" rel="stylesheet" />
+<style>
+    ul li{
+        list-style-type: none;
+        margin-left: -30px !important;  
+    }
+</style>
+<div class="statistics">
+    <div class="row">
+        <div class="col-xl-12 pr-xl-2">
+            <div class="row">
+                <div class="col-sm-8 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <div class="">
+                            <div class="col-lg-12 mt-5" style="background-color: white">
+                                <div class="row" style="padding: 20px">
+                                    <div class="col-lg-3">
+                                        <img src="~/Images/User/32644928_2062295167425734_7686714948314988544_o.jpg" style="width: 200px; height: 200px; border-radius: 15px 15px 15px 15px" />
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <h1 class="field">@Model.Cv.cv_fullname</h1>
+                                        <p class="field">@Model.Cv.cv_location</p>
+                                        <ul>
+                                            <li class="field">
+                                                <b>Ngày sinh: </b> @Model.Cv.cv_bird.Value.Day / @Model.Cv.cv_bird.Value.Month / @Model.Cv.cv_bird.Value.Year
+                                            </li>
+                                            <li>
+                                                <b>Giới tính: </b>
+                                                @if(Model.Cv.cv_sex == 1)
+                                                {
+                                                    <span>Nam</span>
+                                                }
+                                                else if(Model.Cv.cv_sex == 2)
+                                                {
+                                                    <span>Nữ</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Khác</span>
+                                                }
+                                            </li>
+                                            <li class="field"><b>Điện thoại: </b> @Model.Cv.cv_phone</li>
+                                            <li class="field"><b>Email: </b> @Model.Cv.cv_email</li>
+                                            <li class="field"><b>Địa chỉ: </b> @Model.Cv.cv_address</li>
+                                            <li class="field"><b>Facebook: </b> <a href="@Model.Cv.cv_linkfc">@Model.Cv.cv_linkfc</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <br />
+                                        <h4><b>MỤC TIÊU NGHỀ NGHIỆP</b></h4>
+                                        <hr />
+                                        <p>
+                                            @Model.Cv.cv_target
+                                        </p>
+                                        <br />
+                                        <h4><b>HỌC VẤN</b></h4>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <span class="field">@Model.Cv.cv_datebegineducation.Value.Day/@Model.Cv.cv_datebegineducation.Value.Month/@Model.Cv.cv_datebegineducation.Value.Year</span> - <span class="field">@Model.Cv.cv_dateendeducation.Value.Day/@Model.Cv.cv_dateendeducation.Value.Month/@Model.Cv.cv_dateendeducation.Value.Year</span>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li class="field"><b>@Model.Cv.cv_schools</b></li>
+                                                    <li class="field">
+                                                        Chuyên ngành:
+                                                        @Model.Cv.Career.career_name
+                                                    </li>
+                                                    <li>Tốt nghiệp loại <b>@if (Model.Cv.cv_species == 3) { <span>Giỏi</span> } else if (Model.Cv.cv_species == 2) { <span>Khá</span> } else { <span>Tung bình</span> }</b>, điểm trung bình <b>@Model.Cv.cv_point</b></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><b>KINH NGHIỆM VIỆC LÀM</b></h4>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <span class="field">@Model.Cv.cv_datebeginexp.Value.Day/@Model.Cv.cv_datebeginexp.Value.Month/@Model.Cv.cv_datebeginexp.Value.Year</span> - <span class="field">@Model.Cv.cv_dateendexp.Value.Day/@Model.Cv.cv_dateendexp.Value.Month/@Model.Cv.cv_dateendexp.Value.Year</span>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li><b>@Model.Cv.cv_companyname</b></li>
+                                                    <li class="field">
+                                                        @Model.Cv.cv_contentexp
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <span class="field">@Model.Cv.cv_datebeginexptwo.Value.Day/@Model.Cv.cv_datebeginexptwo.Value.Month/@Model.Cv.cv_datebeginexptwo.Value.Year</span> - <span class="field">@Model.Cv.cv_dateendexptwo.Value.Day/@Model.Cv.cv_dateendexptwo.Value.Month/@Model.Cv.cv_dateendexptwo.Value.Year</span>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li><b>@Model.Cv.cv_companynametwo</b></li>
+                                                    <li class="field">
+                                                        @Model.Cv.cv_contentexptwo
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><b>HOẠT ĐỘNG</b></h4>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <span class="field">@Model.Cv.cv_dateendactivate.Value.Day/@Model.Cv.cv_dateendactivate.Value.Month/@Model.Cv.cv_dateendactivate.Value.Year</span>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li><b>Nhóm tình nguyện TOPCV</b></li>
+                                                    <li>Tình nguyện viên</li>
+                                                    <li>
+                                                        Tập hợp các món quà và phân phát tới người vô gia cư.
+                                                        <br />
+                                                        - Chia sẻ, động viên họ vượt qua giai đoạn khó khăn, giúp họ có những suy nghĩ lạc quan
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><b>CHỨNG CHỈ</b></h4>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                2013
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li>Giải nhất Tài năng TOPCV</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><b>GIẢI THƯỞNG</b></h4>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                2013
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li>Nhân viên xuất sắc năm công ty TOPCV</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><b>CÁC KỸ NĂNG</b></h4>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <b>Tin học</b>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li>@Model.Cv.cv_IT</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <b>Tiếng Anh</b>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <ul>
+                                                    <li>@Model.Cv.cv_english</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><b>SỞ THÍCH</b></h4>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                Đọc sách - Mỗi tháng đọc 1 quyển sách về kinh doanh.
+                                                <br />
+                                                Đá bóng - Tham gia hoạt động đá bóng của công ty hàng tuần
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 pr-sm-2 statistics-grid">
+                    <div class="card card_border border-primary-top">
+                        <div style="padding: 20px">
+                            <button class="btn btn-danger w-100">Không chấp nhận ứng viên này</button>
+                            <hr />
+                            <h5>Công cụ</h5>
+                            <div class="row">
+                                <div class="col-lg-6" style="padding: 5px">
+                                    <a href="#">
+                                        <div class="card" style="height: 100px">
+                                            <br />
+                                            <center style="font-size: 30px">
+                                                <i class="fas fa-comment">&nbsp;</i>
+                                                <br />
+                                                <br />
+                                                CHAT
+                                            </center>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6" style="padding: 5px">
+                                    <a href="#">
+                                        <div class="card" style="height: 100px">
+                                            <br />
+                                            <center style="font-size: 30px">
+                                                <i class="fas fa-comment">&nbsp;</i>
+                                                <br />
+                                                <br />
+                                                CHAT
+                                            </center>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6" style="padding: 5px">
+                                    <a href="#">
+                                        <div class="card" style="height: 100px">
+                                            <br />
+                                            <center style="font-size: 30px">
+                                                <i class="fas fa-comment">&nbsp;</i>
+                                                <br />
+                                                <br />
+                                                CHAT
+                                            </center>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6" style="padding: 5px">
+                                    <a href="#">
+                                        <div class="card" style="height: 100px">
+                                            <br />
+                                            <center style="font-size: 30px">
+                                                <i class="fas fa-comment">&nbsp;</i>
+                                                <br />
+                                                <br />
+                                                CHAT
+                                            </center>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6" style="padding: 5px">
+                                    <a href="#">
+                                        <div class="card" style="height: 100px">
+                                            <br />
+                                            <center style="font-size: 30px">
+                                                <i class="fas fa-comment">&nbsp;</i>
+                                                <br /><br />
+                                                CHAT
+                                            </center>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6" style="padding: 5px">
+                                    <a href="#">
+                                        <div class="card" style="height: 100px">
+                                            <br />
+                                            <center style="font-size: 30px">
+                                                <i class="fas fa-comment">&nbsp;</i>
+                                                <br />
+                                                <br />
+                                                CHAT
+                                            </center>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6" style="padding: 5px">
+                                    <a href="#">
+                                        <div class="card" style="height: 100px">
+                                            <br />
+                                            <center style="font-size: 30px">
+                                                <i class="fas fa-comment">&nbsp;</i>
+                                                <br />
+                                                <br />
+                                                CHAT
+                                            </center>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
