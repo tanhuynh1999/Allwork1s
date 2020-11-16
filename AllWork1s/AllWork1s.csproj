@@ -5389,6 +5389,7 @@
     <Content Include="Views\Favourites\Index.cshtml" />
     <Content Include="Views\User\WorkFavourite.cshtml" />
     <Content Include="Views\View\SettingWork.cshtml" />
+    <Content Include="Views\Cvs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
